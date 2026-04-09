@@ -1,18 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { MapPin, Navigation, Compass } from 'lucide-react';
 
 export default function ThemeMinimal({ siteData, products }) {
+  const [userAddress, setUserAddress] = useState('');
+  const [mapUrl, setMapUrl] = useState(siteData?.mapsIframeUrl);
   if (!siteData) return null;
+
+  const handleGeolocate = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setUserAddress(`${latitude},${longitude}`);
+        alert("📍 Position détectée !");
+      });
+    } else {
+      alert("La géolocalisation n'est pas supportée par votre navigateur.");
+    }
+  };
+
+  const handleItinerary = () => {
+    if (!userAddress) {
+      alert("Veuillez entrer une adresse ou utiliser la géolocalisation.");
+      return;
+    }
+    const newUrl = `https://maps.google.com/maps?saddr=${encodeURIComponent(userAddress)}&daddr=${encodeURIComponent(siteData.adresse)}&output=embed`;
+    setMapUrl(newUrl);
+  };
 
   return (
     <div className="theme-minimal">
-      <header style={{ padding: '40px 60px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee' }}>
-        <div style={{ fontWeight: '900', fontSize: '1.2rem', letterSpacing: '4px' }}>{siteData.nomEntreprise.toUpperCase()}</div>
-        <nav style={{ display: 'flex', gap: '40px', fontSize: '12px', fontWeight: '500' }}>
-            <a href="#about" style={{ textDecoration: 'none', color: '#000' }}>À PROPOS</a>
-            <a href="#services" style={{ textDecoration: 'none', color: '#000' }}>SERVICES</a>
-            <a href="#contact" style={{ textDecoration: 'none', color: '#000' }}>CONTACT</a>
-        </nav>
-      </header>
 
       <section style={{ padding: '120px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '100px', alignItems: 'center' }}>
         <div style={{ maxWidth: '600px' }}>
@@ -35,7 +51,7 @@ export default function ThemeMinimal({ siteData, products }) {
         </div>
       </section>
 
-      <section id="services" style={{ padding: '120px 60px', background: '#fcfcfc' }}>
+      <section id="services" style={{ padding: '120px 60px' }}>
         <h2 style={{ fontSize: '1rem', fontWeight: '900', letterSpacing: '8px', marginBottom: '80px', textAlign: 'center' }}>NOS SERVICES</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
           {products.map((p, i) => (
@@ -71,8 +87,33 @@ export default function ThemeMinimal({ siteData, products }) {
                   </ul>
                </div>
             </div>
+            <div style={{ marginBottom: '30px', padding: '20px', border: '1px solid #000' }}>
+               <h4 style={{ fontSize: '0.8rem', fontWeight: '900', letterSpacing: '2px', marginBottom: '20px' }}>ITINÉRAIRE</h4>
+               <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+                  <button 
+                    onClick={handleGeolocate}
+                    style={{ background: '#000', border: 'none', padding: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  >
+                     <MapPin size={18} color="#fff" />
+                  </button>
+                  <input 
+                    type="text" 
+                    placeholder="Votre adresse de départ"
+                    value={userAddress}
+                    onChange={(e) => setUserAddress(e.target.value)}
+                    style={{ flex: 1, border: '1px solid #eee', padding: '10px', fontSize: '13px', outline: 'none' }} 
+                  />
+               </div>
+               <button 
+                  onClick={handleItinerary}
+                  style={{ width: '100%', background: '#000', color: '#fff', border: 'none', padding: '12px', fontWeight: '900', fontSize: '12px', cursor: 'pointer' }}
+               >
+                  CALCULER LE TRAJET
+               </button>
+            </div>
+
             <div style={{ height: '400px', background: '#eee' }}>
-               <iframe src={siteData.mapsIframeUrl} width="100%" height="100%" style={{ border: 0 }} loading="lazy"></iframe>
+               <iframe src={mapUrl} width="100%" height="100%" style={{ border: 0 }} loading="lazy"></iframe>
             </div>
          </div>
       </section>

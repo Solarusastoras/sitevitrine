@@ -48,8 +48,13 @@ export default function ThemeRestoBistro({ siteData, products }) {
               <h3 style={{ fontSize: '2.5rem', fontFamily: 'Handlee, cursive', marginBottom: '30px', textAlign: 'center' }}>{cat}s</h3>
               <div style={{ display: 'grid', gap: '25px' }}>
                 {grouped[cat].map((p, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '15px', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-                    <div style={{ fontWeight: '700' }}>{p.nom || p.name}</div>
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '15px', borderBottom: '1px solid rgba(0,0,0,0.05)', position: 'relative' }}>
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <div style={{ fontWeight: '700' }}>{p.nom || p.name}</div>
+                      {p.tag && (
+                        <span style={{ background: 'var(--primary)', color: '#fff', fontSize: '0.6rem', padding: '2px 6px', borderRadius: '3px', fontWeight: '900' }}>{p.tag}</span>
+                      )}
+                    </div>
                     <div style={{ color: 'var(--primary)', fontWeight: '900' }}>{p.prix || "14"}€</div>
                   </div>
                 ))}

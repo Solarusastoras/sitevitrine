@@ -5,7 +5,7 @@ import { supabase } from './supabaseClient'
 import ThemeLuxe from './themes/ThemeLuxe'
 import ThemeVintage from './themes/ThemeVintage'
 import ThemeMinimal from './themes/ThemeMinimal'
-import ThemeUrbain from './themes/ThemeUrbain'
+import ThemeModerne from './themes/ThemeModerne'
 import ThemeEco from './themes/ThemeEco'
 
 // Gastronomy Themes
@@ -24,11 +24,32 @@ function App() {
   const [currentMetier, setCurrentMetier] = useState('Boulangerie');
   const [selectedEnterprise, setSelectedEnterprise] = useState(null);
   const [products, setProducts] = useState([]);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   // Find category for current profession (Dynamic Theme)
   const professionData = PROFESSIONS.find(p => currentMetier.toLowerCase().includes(p.name.toLowerCase())) || { category: "SERVICES" };
   const category = professionData.category;
   const isRestaurant = ["restaurant", "bistro", "café", "brasserie", "auberge"].some(word => currentMetier.toLowerCase().includes(word));
+
+  // Fetch products from Supabase or generate placeholders
+  const fetchProducts = async () => {
+    if (!selectedEnterprise) return;
+    
+    const { data, error } = await supabase
+      .from('produits')
+      .select('*')
+      .eq('entreprise_id', selectedEnterprise.id);
+
+    if (data && data.length > 0) {
+      setProducts(data);
+    } else {
+      setProducts(getPlaceholderProducts(category, currentMetier));
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [selectedEnterprise, category, currentMetier, refreshTrigger]);
 
   // Derive siteData from selectedEnterprise
   const siteData = selectedEnterprise ? {
@@ -46,26 +67,6 @@ function App() {
     email: selectedEnterprise.email,
     adresse: selectedEnterprise.adresse
   } : null;
-
-  // Fetch products from Supabase or generate placeholders
-  useEffect(() => {
-    async function fetchProducts() {
-      if (!selectedEnterprise) return;
-      
-      const { data, error } = await supabase
-        .from('produits')
-        .select('*')
-        .eq('entreprise_id', selectedEnterprise.id);
-
-      if (data && data.length > 0) {
-        setProducts(data);
-      } else {
-        // Fallback to high-quality placeholders for demo
-        setProducts(getPlaceholderProducts(category, currentMetier));
-      }
-    }
-    fetchProducts();
-  }, [selectedEnterprise, category, currentMetier]);
 
   useEffect(() => {
     // Apply theme variables to root
@@ -111,7 +112,7 @@ function App() {
       case 1: return <ThemeLuxe siteData={siteData} products={products} />;
       case 2: return <ThemeVintage siteData={siteData} products={products} />;
       case 3: return <ThemeMinimal siteData={siteData} products={products} />;
-      case 4: return <ThemeUrbain siteData={siteData} products={products} />;
+      case 4: return <ThemeModerne siteData={siteData} products={products} />;
       case 5: return <ThemeEco siteData={siteData} products={products} />;
       default: return <ThemeMinimal siteData={siteData} products={products} />;
     }
@@ -125,10 +126,12 @@ function App() {
         currentMetier={currentMetier} setCurrentMetier={setCurrentMetier}
         selectedEnterprise={selectedEnterprise} setSelectedEnterprise={setSelectedEnterprise}
         category={category}
+        products={products}
+        onUpdate={() => setRefreshTrigger(prev => prev + 1)}
       />
 
       {/* 💎 RENDU DU THÈME PREMIUM SÉLECTIONNÉ */}
-      <main style={{ marginTop: '80px' }}>
+      <main style={{ marginTop: '120px' }}>
         {renderTheme()}
       </main>
     </div>

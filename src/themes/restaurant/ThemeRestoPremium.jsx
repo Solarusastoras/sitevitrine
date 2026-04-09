@@ -71,6 +71,9 @@ export default function ThemeRestoPremium({ siteData, products }) {
                 <div key={i} className="theme-resto-card" style={{ background: 'rgba(30, 41, 59, 0.4)', padding: '0' }}>
                   <div style={{ height: '250px', overflow: 'hidden', position: 'relative' }}>
                     <img src={p.img || p.image_url} alt={p.nom} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {p.tag && (
+                      <span style={{ position: 'absolute', top: '20px', left: '20px', background: '#ff4400', color: '#fff', padding: '5px 12px', borderRadius: '5px', fontSize: '10px', fontWeight: '900', letterSpacing: '1px' }}>{p.tag.toUpperCase()}</span>
+                    )}
                     <span style={{ position: 'absolute', top: '20px', right: '20px', background: 'var(--primary)', color: '#000', padding: '5px 15px', borderRadius: '50px', fontWeight: '800' }}>{p.prix || "18"}€</span>
                   </div>
                   <div style={{ padding: '25px' }}>

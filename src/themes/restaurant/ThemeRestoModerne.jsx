@@ -39,7 +39,10 @@ export default function ThemeRestoModerne({ siteData, products }) {
             <h2 style={{ fontSize: '4rem', fontWeight: '900', textTransform: 'uppercase', color: 'rgba(0,0,0,0.1)', marginBottom: '-30px', paddingLeft: '20px' }}>{cat}s</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', position: 'relative', zIndex: 1 }}>
               {grouped[cat].map((p, i) => (
-                <div key={i} style={{ border: '2px solid #000', padding: '30px', transition: 'all 0.3s' }}>
+                <div key={i} style={{ border: '2px solid #000', padding: '30px', transition: 'all 0.3s', position: 'relative' }}>
+                  {p.tag && (
+                    <div style={{ position: 'absolute', top: '-12px', right: '20px', background: '#000', color: 'var(--primary)', padding: '5px 15px', fontWeight: '900', fontSize: '0.8rem', textTransform: 'uppercase', zIndex: 10 }}>{p.tag}</div>
+                  )}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
                     <h3 style={{ fontSize: '1.5rem', fontWeight: '900' }}>{p.nom || p.name}</h3>
                     <div style={{ background: '#000', color: '#fff', padding: '5px 10px', fontSize: '1.1rem', fontWeight: '700' }}>{p.prix || "19"}€</div>

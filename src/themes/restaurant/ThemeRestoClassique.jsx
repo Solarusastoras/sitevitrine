@@ -51,7 +51,12 @@ export default function ThemeRestoClassique({ siteData, products }) {
                 {grouped[cat].map((p, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderBottom: '1px dotted var(--primary)', paddingBottom: '10px' }}>
                     <div style={{ flex: 1 }}>
-                      <h4 style={{ fontSize: '1.4rem', marginBottom: '5px' }}>{p.nom || p.name}</h4>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <h4 style={{ fontSize: '1.4rem', marginBottom: '5px' }}>{p.nom || p.name}</h4>
+                        {p.tag && (
+                          <span style={{ fontSize: '0.65rem', color: '#fff', background: 'var(--primary)', padding: '2px 8px', borderRadius: '50px', fontWeight: '800', textTransform: 'uppercase' }}>{p.tag}</span>
+                        )}
+                      </div>
                       <p style={{ fontSize: '0.9rem', opacity: 0.6, fontStyle: 'italic' }}>{p.desc || p.description}</p>
                     </div>
                     <div style={{ fontSize: '1.5rem', fontWeight: '700', paddingLeft: '20px' }}>{p.prix || "22"}€</div>
