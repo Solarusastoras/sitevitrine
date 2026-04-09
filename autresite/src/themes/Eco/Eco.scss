@@ -1,0 +1,310 @@
+@use '../../styles/variables' as *;
+
+.theme-eco {
+  font-family: 'Nunito', sans-serif;
+  background-color: $theme-eco-accent;
+  color: $theme-eco-primary;
+  min-height: 100vh;
+
+  .e-breadcrumb {
+    padding: 20px 50px;
+    max-width: 1200px;
+    font-size: 14px;
+    color: #8c7853;
+
+    a {
+      text-decoration: none;
+      color: $theme-eco-primary;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    .active {
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+
+  .e-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px 0;
+    color: #8c7853;
+    font-style: italic;
+  }
+
+  .e-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+
+    .e-logo {
+      font-size: 28px;
+      font-weight: 600;
+      color: #8c7853;
+      text-decoration: none;
+    }
+
+    .e-nav a {
+      text-decoration: none;
+      color: $theme-eco-primary;
+      margin: 0 15px;
+      font-size: 16px;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #8c7853;
+      }
+    }
+  }
+
+  .e-hero {
+    display: flex;
+    align-items: center;
+    padding: 40px 50px;
+    gap: 50px;
+
+    .e-hero-img-box {
+      flex: 1;
+      border-radius: 200px 200px 20px 20px;
+      overflow: hidden;
+      height: 600px;
+      box-shadow: 0 20px 40px rgba(74, 93, 78, 0.1);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .e-hero-text {
+      flex: 1;
+
+      h1 {
+        font-size: 64px;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        color: $theme-eco-primary;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 40px;
+        color: #6a7c6e;
+      }
+    }
+  }
+
+  .e-btn {
+    background: #8c7853;
+    color: $color-white;
+    border: none;
+    padding: 16px 35px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+
+    &:hover {
+      background: #736142;
+      transform: translateY(-2px);
+    }
+  }
+
+  .e-collection {
+    padding: 80px 50px;
+    background: $color-white;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+
+    .e-section-title {
+      text-align: center;
+      margin-bottom: 60px;
+
+      h2 {
+        font-size: 36px;
+        color: #8c7853;
+        margin-bottom: 10px;
+      }
+    }
+
+    .e-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .e-product-card {
+      text-align: center;
+
+      .e-img-wrapper {
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 3/4;
+        margin-bottom: 20px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s;
+        }
+      }
+
+      &:hover .e-img-wrapper img {
+        transform: scale(1.05);
+      }
+
+      .e-product-info {
+        h3 {
+          font-size: 18px;
+          font-weight: 600;
+          margin: 0 0 5px 0;
+        }
+
+        .e-price {
+          font-size: 16px;
+          color: #8c7853;
+        }
+      }
+    }
+  }
+
+  .e-location-section {
+    padding: 100px 10%;
+    
+    .e-location-card {
+      background: #fdfbf7;
+      border-radius: 40px;
+      padding: 60px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+      border: 1px solid #f0ede8;
+
+      @media (max-width: 768px) {
+        padding: 30px;
+      }
+    }
+
+    .e-location-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      
+      .e-leaf-icon { color: $theme-eco-primary; }
+      h2 { font-size: 32px; color: #4a4a4a; }
+    }
+
+    .e-location-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .e-address {
+      font-size: 18px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .e-hours-box {
+      margin-bottom: 35px;
+      h4 { font-size: 11px; letter-spacing: 2px; color: #999; margin-bottom: 15px; }
+      
+      .e-hours-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .e-hour-item {
+          display: flex;
+          justify-content: space-between;
+          font-size: 15px;
+          color: #555;
+          padding-bottom: 5px;
+          border-bottom: 1px solid #efece7;
+          
+          .time { font-weight: 600; color: #333; }
+        }
+      }
+    }
+
+    .e-btn-nav {
+      background: $theme-eco-primary;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 100px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba($theme-eco-primary, 0.3);
+      }
+    }
+
+    .e-location-map {
+      height: 400px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+      border: 8px solid white;
+      
+      .e-real-map {
+        filter: sepia(0.1) saturate(0.8);
+      }
+    }
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .e-footer {
+    background: $theme-eco-primary;
+    color: $color-white;
+    padding: 60px 50px;
+
+    .e-footer-grid {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+
+    .e-logo {
+        color: $color-white;
+        display: block;
+        margin-bottom: 15px;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+  }
+}

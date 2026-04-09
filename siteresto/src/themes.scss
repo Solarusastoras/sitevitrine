@@ -1,0 +1,96 @@
+/* Deep Theme Definitions */
+
+[data-theme='premium'] {
+  --primary: #f59e0b;
+  --primary-hover: #d97706;
+  --bg-dark: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --font-main: 'Outfit', sans-serif;
+  --card-radius: 20px;
+  --btn-radius: 50px;
+  --hero-layout: row;
+  --hero-align: flex-start;
+  --hero-text-align: left;
+  --header-bg: rgba(15, 23, 42, 0.8);
+  --section-padding: 8rem 0;
+}
+
+[data-theme='classique'] {
+  --primary: #a37b42; /* Antique Gold */
+  --primary-hover: #826235;
+  --bg-dark: #fcfbfa; /* Warm sophisticated white */
+  --bg-card: transparent;
+  --text-main: #1a1a1a;
+  --text-muted: #555555;
+  --glass-border: #a37b42;
+  --glass-shadow: none;
+  --font-main: 'Playfair Display', serif;
+  --card-radius: 0px; 
+  --btn-radius: 0px;
+  --hero-layout: row;
+  --hero-align: flex-start;
+  --hero-text-align: left;
+  --header-bg: #fcfbfa;
+  --section-padding: 8rem 0;
+}
+
+[data-theme='moderne'] {
+  --primary: #ff5722; /* Bold Orange */
+  --primary-hover: #e64a19;
+  --bg-dark: #ffffff;
+  --bg-card: #f8fafc;
+  --text-main: #000000;
+  --text-muted: #475569;
+  --glass-border: #000000;
+  --glass-shadow: none;
+  --font-main: 'Inter', sans-serif;
+  --card-radius: 0;
+  --btn-radius: 0;
+  --hero-layout: row-reverse;
+  --hero-align: flex-start;
+  --hero-text-align: right;
+  --header-bg: #ffffff;
+  --section-padding: 6rem 0;
+}
+
+[data-theme='rustique'] {
+  --primary: #d4a373;
+  --primary-hover: #bc8a5f;
+  --bg-dark: #fefae0;
+  --bg-card: #faedcd;
+  --text-main: #283618; /* Dark Olive */
+  --text-muted: #606c38;
+  --glass-border: rgba(40, 54, 24, 0.1);
+  --glass-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  --font-main: 'Bitter', serif;
+  --card-radius: 30px;
+  --btn-radius: 20px;
+  --hero-layout: row;
+  --hero-align: center;
+  --hero-text-align: left;
+  --header-bg: #faedcd;
+  --section-padding: 7rem 0;
+}
+
+[data-theme='bistro'] {
+  --primary: #dc2626; /* Bistro Red */
+  --primary-hover: #b91c1c;
+  --bg-dark: #fefce8; /* Soft Cream */
+  --bg-card: #ffffff;
+  --text-main: #451a03; /* Dark Wood */
+  --text-muted: #78350f;
+  --glass-border: rgba(220, 38, 38, 0.1);
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --font-main: 'Handlee', cursive;
+  --card-radius: 12px;
+  --btn-radius: 8px;
+  --hero-layout: row-reverse;
+  --hero-align: center;
+  --hero-text-align: center;
+  --header-bg: #dc2626;
+  --section-padding: 9rem 0;
+}

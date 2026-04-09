@@ -1,0 +1,475 @@
+.menu-section {
+  padding: 8rem 0;
+  background: #0b1120;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.subtitle {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.category-section {
+  margin-bottom: 5rem;
+}
+
+.category-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+  
+  [data-theme='classique'] & {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  [data-theme='moderne'] & {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  [data-theme='rustique'] & {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  [data-theme='bistro'] & {
+    background: #fefce8;
+    padding: 2rem;
+    position: relative;
+    border: 4px dashed #dc2626;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+/* Moderne Bento Spans */
+[data-theme='moderne'] .menu-card:nth-child(4n + 1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+[data-theme='moderne'] .menu-card:nth-child(4n + 3) {
+  grid-column: span 2;
+}
+
+.menu-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--glass-shadow);
+  
+  [data-theme='classique'] & {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dotted var(--primary);
+    border-radius: 0;
+    backdrop-filter: none;
+    padding: 2.5rem 0;
+    box-shadow: none;
+  }
+  
+  [data-theme='moderne'] & {
+    border: 3px solid #000;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+    backdrop-filter: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  [data-theme='moderne'] &:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  [data-theme='bistro'] & {
+    background: #1a1a1a;
+    border: 8px solid #fff;
+    outline: 4px solid #dc2626;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    color: #fff;
+    backdrop-filter: none;
+  }
+}
+
+.menu-card:hover {
+  transform: translateY(-10px);
+  
+  [data-theme='premium'] & {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+  
+  [data-theme='moderne'] & {
+    transform: none;
+  }
+  
+  [data-theme='classique'] & {
+    transform: none;
+    background: rgba(188, 142, 92, 0.05);
+  }
+  
+  [data-theme='bistro'] & {
+    transform: scale(1.02) rotate(1deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  }
+}
+
+.card-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  
+  [data-theme='classique'] & {
+    width: 180px;
+    height: 140px;
+    flex-shrink: 0;
+    margin-right: 2.5rem;
+    overflow: hidden;
+  }
+  
+  [data-theme='moderne'] & {
+    height: 100%;
+    flex: 1;
+    border-bottom: 3px solid #000;
+  }
+  
+  [data-theme='bistro'] & {
+    height: 220px;
+    border-bottom: 4px solid #fff;
+  }
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  [data-theme='classique'] & {
+    border: 1px solid var(--primary);
+    border-radius: 2px;
+  }
+
+  transition: transform 0.5s ease;
+}
+
+.menu-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+.card-price {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-top-left-radius: 15px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: -2px -2px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+  
+  [data-theme='moderne'] & {
+    bottom: 0;
+    left: 0;
+    right: auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 15px;
+    background: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    font-size: 1rem;
+    z-index: 10;
+  }
+
+  .menu-card:hover & {
+    [data-theme='moderne'] & {
+      background: #fff;
+      color: #000;
+    }
+  }
+  
+  [data-theme='bistro'] & {
+    background: #dc2626;
+    font-family: 'Handlee', cursive;
+    font-size: 1.3rem;
+    border-top-left-radius: 0;
+    box-shadow: none;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(-5deg);
+  }
+}
+
+.card-content {
+  padding: 2rem;
+  flex: 1;
+  
+  [data-theme='classique'] & {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  [data-theme='moderne'] & {
+    padding: 1.5rem;
+    flex: 0;
+  }
+}
+
+.card-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+  
+  [data-theme='classique'] & {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--primary);
+    text-transform: none;
+    letter-spacing: 0;
+    padding-right: 5rem;
+  }
+  
+  [data-theme='moderne'] & {
+    text-transform: uppercase;
+    font-weight: 950;
+    font-size: 1.2rem;
+    letter-spacing: -1px;
+    color: inherit;
+  }
+  
+  [data-theme='bistro'] & {
+    color: #fff;
+    font-family: 'Handlee', cursive;
+    font-size: 1.8rem;
+  }
+}
+
+.card-content p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  
+  [data-theme='classique'] & {
+    font-size: 1.05rem;
+    margin-bottom: 0;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-width: 600px;
+    font-style: italic;
+  }
+  
+  [data-theme='moderne'] & {
+    display: none;
+  }
+  
+  [data-theme='bistro'] & {
+    color: #a1a1aa;
+    font-family: 'Handlee', cursive;
+    font-size: 1.1rem;
+  }
+}
+
+
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  [data-theme='classique'] & {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+.category {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+
+.add-to-cart {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: var(--primary);
+  transform: rotate(90deg);
+}
+
+@media (max-width: 1024px) {
+  .menu-grid {
+    [data-theme='moderne'] & {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    [data-theme='bistro'] & {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-section {
+    padding: 4rem 0;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+
+    [data-theme='moderne'] & {
+      display: flex;
+      flex-direction: column;
+    }
+
+    [data-theme='rustique'] & {
+      gap: 2rem;
+    }
+  }
+
+  /* Disable bento spans on mobile */
+  [data-theme='moderne'] .menu-card:nth-child(n) {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .menu-card {
+    [data-theme='classique'] & {
+      flex-direction: column-reverse !important;
+      padding: 2rem 1.5rem !important;
+      text-align: center;
+    }
+  }
+
+  .card-price {
+    [data-theme='classique'] & {
+      position: static;
+      display: block;
+      margin-top: 1rem;
+      text-align: center;
+    }
+  }
+
+  .card-image {
+    [data-theme='classique'] & {
+      margin-right: 0 !important;
+      margin-bottom: 1.5rem;
+      width: 100% !important;
+      height: 200px !important;
+    }
+
+    [data-theme='moderne'] & {
+      height: 250px;
+      flex: none;
+    }
+  }
+
+  .card-content h3 {
+    [data-theme='classique'] & {
+      font-size: 1.8rem;
+    }
+    
+    [data-theme='moderne'] & {
+      font-size: 1.5rem;
+    }
+  }
+
+  .card-content p {
+    [data-theme='classique'] & {
+      margin: 0 auto;
+    }
+  }
+
+  .card-footer {
+    [data-theme='classique'] & {
+      flex-direction: row !important;
+      justify-content: center !important;
+      gap: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .card-image {
+    [data-theme='moderne'] & {
+      height: 200px;
+    }
+  }
+}

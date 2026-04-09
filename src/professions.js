@@ -91,5 +91,6 @@ export const PROFESSIONS = [
   { name: "Verrier", category: "ARTISAN" },
   { name: "Vétérinaire", category: "SANTE" },
   { name: "Vitrailliste", category: "ARTISAN" },
+  { name: "Vendeur de vêtements", category: "SERVICES" },
   { name: "Autre", category: "SERVICES" }
 ];

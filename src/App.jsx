@@ -1,167 +1,136 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { supabase } from './supabaseClient'
 import { PROFESSIONS } from './professions'
 import { THEME_MATRIX } from './themes'
-import EditorSidebar from './Editor.jsx'
+import { supabase } from './supabaseClient'
+import ThemeLuxe from './themes/ThemeLuxe'
+import ThemeVintage from './themes/ThemeVintage'
+import ThemeMinimal from './themes/ThemeMinimal'
+import ThemeUrbain from './themes/ThemeUrbain'
+import ThemeEco from './themes/ThemeEco'
+
+// Gastronomy Themes
+import ThemeRestoPremium from './themes/restaurant/ThemeRestoPremium'
+import ThemeRestoClassique from './themes/restaurant/ThemeRestoClassique'
+import ThemeRestoModerne from './themes/restaurant/ThemeRestoModerne'
+import ThemeRestoRustique from './themes/restaurant/ThemeRestoRustique'
+import ThemeRestoBistro from './themes/restaurant/ThemeRestoBistro'
+
+import './themes.css'
+import Configurator from './Configurator.jsx'
+import { getPlaceholderProducts } from './productsData'
 
 function App() {
-  const { id } = useParams();
-  const [siteData, setSiteData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [currentStyle, setCurrentStyle] = useState(1);
+  const [currentMetier, setCurrentMetier] = useState('Boulangerie');
+  const [selectedEnterprise, setSelectedEnterprise] = useState(null);
+  const [products, setProducts] = useState([]);
 
-  // 1. Fetching logic
+  // Find category for current profession (Dynamic Theme)
+  const professionData = PROFESSIONS.find(p => currentMetier.toLowerCase().includes(p.name.toLowerCase())) || { category: "SERVICES" };
+  const category = professionData.category;
+  const isRestaurant = ["restaurant", "bistro", "café", "brasserie", "auberge"].some(word => currentMetier.toLowerCase().includes(word));
+
+  // Derive siteData from selectedEnterprise
+  const siteData = selectedEnterprise ? {
+    ...selectedEnterprise,
+    selectedStyle: currentStyle,
+    nomEntreprise: selectedEnterprise.nom,
+    metier: selectedEnterprise.secteur,
+    category: category,
+    descriptionCourte: selectedEnterprise.description_courte || 
+                       (selectedEnterprise.secteur === 'Boulangerie' ? "L'excellence artisanale au service de votre gourmandise." : "Votre professionnel de confiance."),
+    descriptionLongue: selectedEnterprise.description || "Bienvenue sur notre site vitrine premium.",
+    horaires: typeof selectedEnterprise.horaires === 'string' ? JSON.parse(selectedEnterprise.horaires) : selectedEnterprise.horaires || {},
+    mapsIframeUrl: `https://maps.google.com/maps?q=${selectedEnterprise.adresse}&z=15&output=embed`,
+    telephone: selectedEnterprise.telephone,
+    email: selectedEnterprise.email,
+    adresse: selectedEnterprise.adresse
+  } : null;
+
+  // Fetch products from Supabase or generate placeholders
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
+    async function fetchProducts() {
+      if (!selectedEnterprise) return;
+      
       const { data, error } = await supabase
-        .from('entreprises')
+        .from('produits')
         .select('*')
-        .eq('id', Number(id))
-        .single();
+        .eq('entreprise_id', selectedEnterprise.id);
 
-      if (data) {
-        const parsedHoraires = typeof data.horaires === 'string' ? JSON.parse(data.horaires) : data.horaires;
-        const coords = typeof data.coordonnees === 'string' ? JSON.parse(data.coordonnees) : data.coordonnees;
-        
-        setSiteData({
-          ...data,
-          selectedStyle: data.selected_style || 1,
-          nomEntreprise: data.nom,
-          metier: data.secteur,
-          descriptionCourte: data.description || "Votre professionnel de confiance.",
-          descriptionLongue: data.description || "Bienvenue sur notre site vitrine.",
-          horaires: parsedHoraires || {},
-          mapsIframeUrl: `https://maps.google.com/maps?q=${coords?.lat || data.adresse}&z=15&output=embed`
-        });
+      if (data && data.length > 0) {
+        setProducts(data);
+      } else {
+        // Fallback to high-quality placeholders for demo
+        setProducts(getPlaceholderProducts(category, currentMetier));
       }
-      setLoading(false);
     }
-    fetchData();
-  }, [id]);
+    fetchProducts();
+  }, [selectedEnterprise, category, currentMetier]);
 
-  // 2. Theme logic (MUST BE BEFORE EARLY RETURNS)
   useEffect(() => {
-    if (!siteData) return;
-
-    const metierName = siteData.metier || "";
-    const professionData = PROFESSIONS.find(p => metierName.toLowerCase().includes(p.name.toLowerCase())) || { category: "SERVICES" };
-    const category = professionData.category;
-    const theme = THEME_MATRIX[category][siteData.selectedStyle || 1];
-    
+    // Apply theme variables to root
+    const theme = THEME_MATRIX[category][currentStyle];
     if (!theme) return;
     
+    // Map style 1-5 to 6-10 for restaurants in CSS data-theme
+    const styleId = isRestaurant ? currentStyle + 5 : currentStyle;
+    
     const root = document.documentElement;
-    document.body.setAttribute('data-theme', siteData.selectedStyle || 1);
+    document.body.setAttribute('data-theme', styleId);
     
     Object.entries(theme).forEach(([key, value]) => {
       root.style.setProperty(`--${key}`, value);
     });
-    document.body.style.transition = 'all 0.5s ease';
-  }, [siteData]);
 
-  if (loading) return (
-    <div style={{height:'100vh', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.5rem', fontFamily:'var(--font-title)'}}>
-      🌟 Préparation de votre vitrine premium...
-    </div>
-  );
+    document.body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+  }, [currentStyle, category]);
 
-  if (!siteData) return (
-    <div style={{height:'100vh', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.2rem'}}>
-       😕 Site introuvable sur Supabase (ID: {id})
-    </div>
-  );
+  // Helper to render the correct Premium Theme Component
+  const renderTheme = () => {
+    if (!siteData) return (
+      <div style={{ padding: '20vh 0', textAlign: 'center', opacity: 0.4 }}>
+         <h2>Aucun commerce trouvé pour ce métier dans Supabase.</h2>
+         <p>Essayez "Boulangerie" ou "Boucherie" pour la démonstration.</p>
+      </div>
+    );
 
-  const { 
-    selectedStyle,
-    nomEntreprise, 
-    metier,
-    descriptionCourte, 
-    descriptionLongue, 
-    horaires, 
-    mapsIframeUrl, 
-    telephone, 
-    email, 
-    adresse 
-  } = siteData;
+    // RESTAURANT FAMILY
+    if (isRestaurant) {
+      switch(currentStyle) {
+        case 1: return <ThemeRestoPremium siteData={siteData} products={products} />;
+        case 2: return <ThemeRestoClassique siteData={siteData} products={products} />;
+        case 3: return <ThemeRestoModerne siteData={siteData} products={products} />;
+        case 4: return <ThemeRestoRustique siteData={siteData} products={products} />;
+        case 5: return <ThemeRestoBistro siteData={siteData} products={products} />;
+        default: return <ThemeRestoPremium siteData={siteData} products={products} />;
+      }
+    }
+
+    // BUSINESS FAMILY
+    switch(currentStyle) {
+      case 1: return <ThemeLuxe siteData={siteData} products={products} />;
+      case 2: return <ThemeVintage siteData={siteData} products={products} />;
+      case 3: return <ThemeMinimal siteData={siteData} products={products} />;
+      case 4: return <ThemeUrbain siteData={siteData} products={products} />;
+      case 5: return <ThemeEco siteData={siteData} products={products} />;
+      default: return <ThemeMinimal siteData={siteData} products={products} />;
+    }
+  }
 
   return (
-    <div className="app-container" style={{ marginLeft: isEditorOpen ? '350px' : '0', transition: 'margin 0.4s ease' }}>
-      <EditorSidebar siteData={siteData} setSiteData={setSiteData} isOpen={isEditorOpen} setIsOpen={setIsEditorOpen} />
+    <div className="app-container">
+      {/* 🛠️ CONFIGURATEUR UNIVERSEL */}
+      <Configurator 
+        currentStyle={currentStyle} setCurrentStyle={setCurrentStyle}
+        currentMetier={currentMetier} setCurrentMetier={setCurrentMetier}
+        selectedEnterprise={selectedEnterprise} setSelectedEnterprise={setSelectedEnterprise}
+        category={category}
+      />
 
-      {/* NAVBAR */}
-      <nav>
-        <div className="container nav-content">
-          <div className="logo">{nomEntreprise}</div>
-          <div className="nav-links">
-            <a href="#about" style={{marginRight: '1.5rem', textDecoration: 'none', color: 'inherit'}}>À propos</a>
-            <a href="#services" style={{marginRight: '1.5rem', textDecoration: 'none', color: 'inherit'}}>Prestations</a>
-            <a href="#contact" style={{textDecoration: 'none', color: 'inherit', fontWeight: '800'}}>Contact</a>
-          </div>
-        </div>
-      </nav>
-
-      {/* HERO SECTION */}
-      <header className="hero reveal">
-        <div className="container">
-          <h1 key={nomEntreprise}>{nomEntreprise}</h1>
-          <p className="hero-slogan">{descriptionCourte}</p>
-          <a href="#contact" className="btn-primary">Prendre Contact</a>
-        </div>
-      </header>
-
-      {/* ABOUT */}
-      <section id="about" className="container reveal">
-        <h2 style={{borderLeft: '5px solid var(--accent)', paddingLeft: '1rem'}}>{metier}</h2>
-        <div style={{marginTop:'2rem', maxWidth:'80%rem'}}>
-          <p style={{fontSize: '1.2rem', opacity: 0.8}}>{descriptionLongue}</p>
-        </div>
-      </section>
-
-      {/* SCHEDULE & CONTACT */}
-      <section id="contact" className="container">
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem'}}>
-          <div className="reveal">
-            <h2 style={{marginBottom: '2rem'}}>Horaires d'Ouverture</h2>
-            <div className="horaires-wrapper">
-              <table className="horaires-table">
-                <tbody>
-                  {Object.entries(horaires).map(([jour, heures]) => (
-                    <tr key={jour}>
-                      <td className="horaires-day" style={{textTransform:'capitalize'}}>{jour}</td>
-                      <td style={{textAlign: 'right'}}>{heures}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          
-          <div className="reveal" style={{animationDelay: '0.3s'}}>
-            <h2 style={{marginBottom: '2rem'}}>Coordonnées</h2>
-            <div style={{display:'flex', gap:'1rem', flexDirection:'column'}}>
-               <p>📍 {adresse}</p>
-               <p>📞 {telephone}</p>
-               {email && <p>✉️ {email}</p>}
-            </div>
-            <div className="map-container" style={{marginTop:'2rem'}}>
-              <iframe
-                title="Google Maps"
-                src={mapsIframeUrl}
-                width="100%" height="100%" allowFullScreen="" loading="lazy"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <div className="container" style={{textAlign:'center'}}>
-          <p>© {new Date().getFullYear()} {nomEntreprise}.</p>
-          <p style={{fontSize:'0.8rem', opacity:0.5, marginTop:'1rem'}}>Propulsé par votre Générateur Supabase</p>
-        </div>
-      </footer>
+      {/* 💎 RENDU DU THÈME PREMIUM SÉLECTIONNÉ */}
+      <main style={{ marginTop: '80px' }}>
+        {renderTheme()}
+      </main>
     </div>
   )
 }

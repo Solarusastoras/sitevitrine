@@ -1,0 +1,380 @@
+@use '../../styles/variables' as *;
+
+.theme-urbain {
+  font-family: 'Outfit', sans-serif;
+  background-color: $theme-urbain-bg;
+  color: $color-white;
+  min-height: 100vh;
+  padding-bottom: 80px;
+
+  .u-breadcrumb {
+    padding: 20px 40px;
+    max-width: 1200px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #555;
+    text-transform: uppercase;
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $theme-urbain-primary;
+      }
+    }
+
+    .active {
+      color: $theme-urbain-primary;
+    }
+  }
+
+  .u-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px 0;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #333;
+  }
+
+  .u-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #1a1a1a;
+    background: rgba(5,5,5,0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    .u-logo {
+      font-weight: 900;
+      font-size: 24px;
+      color: $theme-urbain-primary;
+      letter-spacing: -1px;
+      text-decoration: none;
+    }
+
+    .u-nav a {
+      color: $color-white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 14px;
+
+      &:hover {
+        color: $theme-urbain-primary;
+      }
+    }
+
+    .u-cart {
+      background: transparent;
+      border: 1px solid #333;
+      color: $color-white;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: $transition-neon;
+
+      &:hover {
+        background: $theme-urbain-primary;
+        color: #000;
+        border-color: $theme-urbain-primary;
+      }
+    }
+  }
+
+  .u-bento-hero {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 300px 300px;
+    gap: 20px;
+    padding: 40px;
+
+    .u-bento-item {
+      background: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .u-hero-main {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(135deg, #1a1a1a 0%, #050505 100%);
+      border: 1px solid #222;
+
+      h1 {
+        font-size: 80px;
+        font-weight: 900;
+        line-height: 0.9;
+        margin: 0 0 20px 0;
+        color: $color-white;
+      }
+
+      p {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 40px;
+      }
+
+      .u-btn-neon {
+        align-self: flex-start;
+        background: $theme-urbain-primary;
+        color: #000;
+        border: none;
+        padding: 20px 40px;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 900;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+        transition: all 0.3s;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 0 40px rgba(204, 255, 0, 0.6);
+        }
+      }
+    }
+
+    .u-hero-img1 {
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .u-hero-img2 {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+
+    .u-hero-promo {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+      background: $theme-urbain-primary;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h2 {
+        font-size: 60px;
+        font-weight: 900;
+        margin: 0;
+      }
+
+      p {
+        font-weight: 700;
+        margin: 0;
+      }
+    }
+  }
+
+  .u-marquee {
+    background: #111;
+    color: $theme-urbain-primary;
+    padding: 20px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 24px;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    margin: 40px 0;
+  }
+
+  .u-collection {
+    .u-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 40px;
+    }
+
+    .u-product-card {
+      background: #111;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid #222;
+      transition: border-color 0.3s;
+
+      &:hover {
+        border-color: $theme-urbain-primary;
+      }
+
+      .u-img-wrapper {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 20px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .u-tag {
+          position: absolute;
+          top: 10px; left: 10px;
+          background: $theme-urbain-primary;
+          color: #000;
+          font-weight: 900;
+          padding: 4px 8px;
+          font-size: 12px;
+          border-radius: 4px;
+        }
+      }
+
+      .u-product-info {
+        h3 {
+          font-size: 18px;
+          margin: 0 0 15px 0;
+          font-weight: 700;
+        }
+
+        .u-price-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .u-price {
+            font-size: 20px;
+            font-weight: 900;
+            color: $theme-urbain-primary;
+          }
+        }
+      }
+    }
+  }
+
+  .u-store-section {
+    padding: 100px 5%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: #0a0a0a;
+
+    .u-store-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .u-marquee-short {
+      font-size: 24px;
+      font-weight: 900;
+      color: $theme-urbain-primary;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba($theme-urbain-primary, 0.5);
+    }
+
+    .u-info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      .u-info-card {
+        h3 {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 15px;
+          letter-spacing: 2px;
+        }
+
+        p {
+          font-size: 18px;
+          color: white;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+
+      .u-hour-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: #aaa;
+        font-size: 16px;
+
+        span:last-child {
+          color: white;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .u-map-container {
+      position: relative;
+      height: 450px;
+      border: 1px solid rgba($theme-urbain-primary, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba($theme-urbain-primary, 0.1);
+      
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        filter: invert(90%) hue-rotate(180deg) brightness(0.9); // Dark mode map
+      }
+    }
+
+    .u-btn-outline {
+      background: transparent;
+      border: 1px solid $theme-urbain-primary;
+      color: $theme-urbain-primary;
+      padding: 12px 24px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+
+      &:hover {
+        background: $theme-urbain-primary;
+        color: black;
+        box-shadow: 0 0 15px $theme-urbain-primary;
+      }
+    }
+  }
+
+  .u-footer {
+    text-align: center;
+    padding: 60px;
+    margin-top: 60px;
+    border-top: 1px dashed #333;
+    color: #888;
+
+    .u-logo {
+        display: block;
+        margin-bottom: 10px;
+    }
+  }
+}

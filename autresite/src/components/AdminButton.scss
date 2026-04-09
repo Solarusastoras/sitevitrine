@@ -1,0 +1,30 @@
+@use '../styles/variables' as *;
+
+.admin-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0.3; // Very discrete
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+  }
+}
