@@ -5,8 +5,8 @@ export const PROFESSIONS = [
   { name: "Auto-école", category: "SERVICES" },
   { name: "Bijouterie", category: "CREATIF" },
   { name: "Bottier", category: "ARTISAN" },
-  { name: "Boulangerie", category: "FOOD" },
-  { name: "Boucherie", category: "FOOD" },
+  { name: "Boulangerie", category: "FOOD", productCategories: ["Pain", "Viennoiserie", "Sandwich", "Gâteaux"] },
+  { name: "Boucherie", category: "FOOD", productCategories: ["Viande", "Charcuterie", "Traiteur"] },
   { name: "Brasseur", category: "FOOD" },
   { name: "Café / Bar", category: "FOOD" },
   { name: "Canalisateur", category: "ARTISAN" },
@@ -78,7 +78,7 @@ export const PROFESSIONS = [
   { name: "Pressing", category: "SERVICES" },
   { name: "Prothésiste dentaire", category: "SANTE" },
   { name: "Ramoneur", category: "ARTISAN" },
-  { name: "Restaurant", category: "FOOD" },
+  { name: "Restaurant", category: "FOOD", productCategories: ["Plat du jour", "Entrée", "Plat", "Dessert", "Boisson"] },
   { name: "Sellier", category: "ARTISAN" },
   { name: "Sérigraphe", category: "CREATIF" },
   { name: "Sertisseur", category: "ARTISAN" },
@@ -91,6 +91,6 @@ export const PROFESSIONS = [
   { name: "Verrier", category: "ARTISAN" },
   { name: "Vétérinaire", category: "SANTE" },
   { name: "Vitrailliste", category: "ARTISAN" },
-  { name: "Vendeur de vêtements", category: "SERVICES" },
+  { name: "Vendeur de vêtements", category: "SERVICES", productCategories: ["Haut", "Bas", "Lingerie", "Chaussure", "Accessoire", "Chapeau"] },
   { name: "Autre", category: "SERVICES" }
 ];

@@ -15,7 +15,6 @@ import ThemeRestoModerne from './themes/restaurant/ThemeRestoModerne'
 import ThemeRestoRustique from './themes/restaurant/ThemeRestoRustique'
 import ThemeRestoBistro from './themes/restaurant/ThemeRestoBistro'
 
-import './themes.css'
 import Configurator from './Configurator.jsx'
 import { getPlaceholderProducts } from './productsData'
 
@@ -25,6 +24,11 @@ function App() {
   const [selectedEnterprise, setSelectedEnterprise] = useState(null);
   const [products, setProducts] = useState([]);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  // Auth & In-Situ Editing States
+  const [isAdminConnected, setIsAdminConnected] = useState(false);
+  const [isClientConnected, setIsClientConnected] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   // Find category for current profession (Dynamic Theme)
   const professionData = PROFESSIONS.find(p => currentMetier.toLowerCase().includes(p.name.toLowerCase())) || { category: "SERVICES" };
@@ -69,6 +73,12 @@ function App() {
   } : null;
 
   useEffect(() => {
+    const handleContextMenu = (e) => e.preventDefault();
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
+
+  useEffect(() => {
     // Apply theme variables to root
     const theme = THEME_MATRIX[category][currentStyle];
     if (!theme) return;
@@ -89,32 +99,39 @@ function App() {
   // Helper to render the correct Premium Theme Component
   const renderTheme = () => {
     if (!siteData) return (
-      <div style={{ padding: '20vh 0', textAlign: 'center', opacity: 0.4 }}>
+      <div className="no-commerce-found">
          <h2>Aucun commerce trouvé pour ce métier dans Supabase.</h2>
          <p>Essayez "Boulangerie" ou "Boucherie" pour la démonstration.</p>
       </div>
     );
 
+    const themeProps = { 
+      siteData, 
+      products, 
+      isEditable: isClientConnected, 
+      onEditProduct: setEditingProduct 
+    };
+
     // RESTAURANT FAMILY
     if (isRestaurant) {
       switch(currentStyle) {
-        case 1: return <ThemeRestoPremium siteData={siteData} products={products} />;
-        case 2: return <ThemeRestoClassique siteData={siteData} products={products} />;
-        case 3: return <ThemeRestoModerne siteData={siteData} products={products} />;
-        case 4: return <ThemeRestoRustique siteData={siteData} products={products} />;
-        case 5: return <ThemeRestoBistro siteData={siteData} products={products} />;
-        default: return <ThemeRestoPremium siteData={siteData} products={products} />;
+        case 1: return <ThemeRestoPremium {...themeProps} />;
+        case 2: return <ThemeRestoClassique {...themeProps} />;
+        case 3: return <ThemeRestoModerne {...themeProps} />;
+        case 4: return <ThemeRestoRustique {...themeProps} />;
+        case 5: return <ThemeRestoBistro {...themeProps} />;
+        default: return <ThemeRestoPremium {...themeProps} />;
       }
     }
 
     // BUSINESS FAMILY
     switch(currentStyle) {
-      case 1: return <ThemeLuxe siteData={siteData} products={products} />;
-      case 2: return <ThemeVintage siteData={siteData} products={products} />;
-      case 3: return <ThemeMinimal siteData={siteData} products={products} />;
-      case 4: return <ThemeModerne siteData={siteData} products={products} />;
-      case 5: return <ThemeEco siteData={siteData} products={products} />;
-      default: return <ThemeMinimal siteData={siteData} products={products} />;
+      case 1: return <ThemeLuxe {...themeProps} />;
+      case 2: return <ThemeVintage {...themeProps} />;
+      case 3: return <ThemeMinimal {...themeProps} />;
+      case 4: return <ThemeModerne {...themeProps} />;
+      case 5: return <ThemeEco {...themeProps} />;
+      default: return <ThemeMinimal {...themeProps} />;
     }
   }
 
@@ -128,6 +145,9 @@ function App() {
         category={category}
         products={products}
         onUpdate={() => setRefreshTrigger(prev => prev + 1)}
+        isAdminConnected={isAdminConnected} setIsAdminConnected={setIsAdminConnected}
+        isClientConnected={isClientConnected} setIsClientConnected={setIsClientConnected}
+        editingProduct={editingProduct} setEditingProduct={setEditingProduct}
       />
 
       {/* 💎 RENDU DU THÈME PREMIUM SÉLECTIONNÉ */}
@@ -135,7 +155,7 @@ function App() {
         {renderTheme()}
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

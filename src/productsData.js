@@ -29,23 +29,23 @@ export const DEFAULT_PRODUCTS = {
 export const METIER_SPECIFIC_PRODUCTS = {
   "Boulangerie": [
     // Gâteaux (5)
-    { type: "gateau", nom: "Éclair au Chocolat", desc: "Crème pâtissière onctueuse et glaçage brillant.", img: "/images/products/eclair.png" },
-    { type: "gateau", nom: "Tartelette aux Fruits", desc: "Fruits frais de saison sur crème amandine.", img: "/images/products/tartelette.png" },
-    { type: "gateau", nom: "Paris-Brest", desc: "Choux léger, crème pralinée et amandes effilées.", img: "/images/products/paris_brest.png" },
-    { type: "gateau", nom: "Mille-Feuille", desc: "Trois couches de feuilletage et crème vanille intense.", img: "/images/products/mille_feuille.png" },
-    { type: "gateau", nom: "Le Framboisier", desc: "Génoise légère et crème mousseline aux framboises.", img: "/images/products/framboisier.png" },
+    { category: "Gâteaux", nom: "Éclair au Chocolat", desc: "Crème pâtissière onctueuse et glaçage brillant.", img: "/images/products/eclair.png" },
+    { category: "Gâteaux", nom: "Tartelette aux Fruits", desc: "Fruits frais de saison sur crème amandine.", img: "/images/products/tartelette.png" },
+    { category: "Gâteaux", nom: "Paris-Brest", desc: "Choux léger, crème pralinée et amandes effilées.", img: "/images/products/paris_brest.png" },
+    { category: "Gâteaux", nom: "Mille-Feuille", desc: "Trois couches de feuilletage et crème vanille intense.", img: "/images/products/mille_feuille.png" },
+    { category: "Gâteaux", nom: "Le Framboisier", desc: "Génoise légère et crème mousseline aux framboises.", img: "/images/products/framboisier.png" },
     // Viennoiseries (5)
-    { type: "viennoiserie", nom: "Croissant Maison", desc: "Pur beurre de baratte, croustillant et fondant.", img: "/images/products/croissant.png" },
-    { type: "viennoiserie", nom: "Pain au Chocolat", desc: "Deux barres de chocolat dans un feuilletage d'exception.", img: "/images/products/pain_chocolat.png" },
-    { type: "viennoiserie", nom: "Brioche Sucre", desc: "Mie filante et gros grains de sucre croquants.", img: "/images/products/brioche.png" },
-    { type: "viennoiserie", nom: "Chausson aux Pommes", desc: "Compote maison de pommes acidulées.", img: "/images/products/chausson.png" },
-    { type: "viennoiserie", nom: "Pain aux Raisins", desc: "Crème pâtissière et raisins secs marinés.", img: "/images/products/pain_raisins.png" },
+    { category: "Viennoiserie", nom: "Croissant Maison", desc: "Pur beurre de baratte, croustillant et fondant.", img: "/images/products/croissant.png" },
+    { category: "Viennoiserie", nom: "Pain au Chocolat", desc: "Deux barres de chocolat dans un feuilletage d'exception.", img: "/images/products/pain_chocolat.png" },
+    { category: "Viennoiserie", nom: "Brioche Sucre", desc: "Mie filante et gros grains de sucre croquants.", img: "/images/products/brioche.png" },
+    { category: "Viennoiserie", nom: "Chausson aux Pommes", desc: "Compote maison de pommes acidulées.", img: "/images/products/chausson.png" },
+    { category: "Viennoiserie", nom: "Pain aux Raisins", desc: "Crème pâtissière et raisins secs marinés.", img: "/images/products/pain_raisins.png" },
     // Sandwiches (5)
-    { type: "sandwich", nom: "Le Parisien", desc: "Jambon blanc supérieur, beurre AOP et cornichons.", img: "/images/products/parisien.png" },
-    { type: "sandwich", nom: "Poulet Curry", desc: "Crestes de poulet, crudités et sauce curry secrète.", img: "/images/products/poulet_curry.png" },
-    { type: "sandwich", nom: "Le Thon-Crudités", desc: "Mélange de thon, œufs, tomates et salade fraîche.", img: "/images/products/thon.png" },
-    { type: "sandwich", nom: "Le Végétarien", desc: "Légumes grillés, feta et houmous maison.", img: "/images/products/vegetarien.png" },
-    { type: "sandwich", nom: "Le Pan Bagnat", desc: "Saveurs du sud, huile d'olive et légumes croquants.", img: "/images/products/pan_bagnat.png" }
+    { category: "Sandwich", nom: "Le Parisien", desc: "Jambon blanc supérieur, beurre AOP et cornichons.", img: "/images/products/parisien.png" },
+    { category: "Sandwich", nom: "Poulet Curry", desc: "Crestes de poulet, crudités et sauce curry secrète.", img: "/images/products/poulet_curry.png" },
+    { category: "Sandwich", nom: "Le Thon-Crudités", desc: "Mélange de thon, œufs, tomates et salade fraîche.", img: "/images/products/thon.png" },
+    { category: "Sandwich", nom: "Le Végétarien", desc: "Légumes grillés, feta et houmous maison.", img: "/images/products/vegetarien.png" },
+    { category: "Sandwich", nom: "Le Pan Bagnat", desc: "Saveurs du sud, huile d'olive et légumes croquants.", img: "/images/products/pan_bagnat.png" }
   ],
   "Boucherie": [
     { nom: "Côte de Bœuf Maturée", desc: "Sélectionnée avec soin et maturée en cave pour une tendreté absolue.", img: "/images/products/boucherie/cote_boeuf.png" },
@@ -68,6 +68,8 @@ export const METIER_SPECIFIC_PRODUCTS = {
     { nom: "Soin Rituel", desc: "Moment de détente et soin profond pour votre cuir chevelu.", img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" }
   ],
   "Restaurant": [
+    // Plat du jour
+    { category: "Plat du jour", nom: "L'Entrecôte Gourmande", desc: "Une pièce de bœuf d'exception accompagnée de frites maison et notre sauce secrète.", prix: "22", img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800&q=80" },
     // Entrées
     { category: "Entrée", nom: "Foie Gras Maison", desc: "Foie gras de canard mi-cuit, chutney de figues et brioche toastée.", prix: "18", img: "https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?w=800&q=80" },
     { category: "Entrée", nom: "Carpaccio de Saint-Jacques", desc: "Noix de Saint-Jacques marinées aux agrumes et baies roses.", prix: "16", img: "https://images.unsplash.com/photo-1533642954103-6cb669fc9e32?w=800&q=80" },
@@ -76,7 +78,11 @@ export const METIER_SPECIFIC_PRODUCTS = {
     { category: "Plat", nom: "Risotto aux Gambas", desc: "Risotto crémeux au safran et gambas snackées à la plancha.", prix: "24", img: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800&q=80" },
     // Desserts
     { category: "Dessert", nom: "Millefeuille Vanille", desc: "Pâte feuilletée légère et crème diplomate à la vanille bourbon.", prix: "11", img: "https://images.unsplash.com/photo-1510629954389-c1e0da47d415?w=800&q=80" },
-    { category: "Dessert", nom: "Fondant Chocolat", desc: "Cœur coulant au chocolat Valrhona, glace stracciatella.", prix: "10", img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&q=80" }
+    { category: "Dessert", nom: "Fondant Chocolat", desc: "Cœur coulant au chocolat Valrhona, glace stracciatella.", prix: "10", img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&q=80" },
+    // Boissons
+    { category: "Boisson", nom: "Vin Rouge - Bordeaux", desc: "Verre de Bordeaux, slection du sommelier.", prix: "7", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" },
+    { category: "Boisson", nom: "Bière Artisanale", desc: "Bière blonde locale brassée à l'ancienne.", prix: "6", img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800&q=80" },
+    { category: "Boisson", nom: "Limonade Maison", desc: "Limonade fraîche au citron bio et menthe du jardin.", prix: "5", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=800&q=80" }
   ],
   "Vendeur de vêtements": [
     { nom: "Veste de Saison", desc: "Coupe moderne et matières nobles pour un style affirmé.", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=80" },
@@ -90,14 +96,20 @@ export const METIER_SPECIFIC_PRODUCTS = {
 export const getPlaceholderProducts = (category, metier) => {
   const isRestaurant = ["restaurant", "bistro", "café", "brasserie", "auberge"].some(word => metier.toLowerCase().includes(word));
   
+  let baseProducts = [];
+
   if (isRestaurant && METIER_SPECIFIC_PRODUCTS["Restaurant"]) {
-    return METIER_SPECIFIC_PRODUCTS["Restaurant"];
+    baseProducts = METIER_SPECIFIC_PRODUCTS["Restaurant"];
+  } else if (metier && METIER_SPECIFIC_PRODUCTS[metier]) {
+    baseProducts = METIER_SPECIFIC_PRODUCTS[metier];
+  } else {
+    baseProducts = DEFAULT_PRODUCTS[category] || DEFAULT_PRODUCTS["SERVICES"];
   }
 
-  // Try specific metier first
-  if (metier && METIER_SPECIFIC_PRODUCTS[metier]) {
-    return METIER_SPECIFIC_PRODUCTS[metier];
-  }
-  // Then try generic category
-  return DEFAULT_PRODUCTS[category] || DEFAULT_PRODUCTS["SERVICES"];
+  // Prefix local image paths with Vite's base URL
+  const baseUrl = import.meta.env.BASE_URL;
+  return baseProducts.map(p => ({
+    ...p,
+    img: (p.img && p.img.startsWith('/images/')) ? `${baseUrl}${p.img.slice(1)}` : p.img
+  }));
 };
