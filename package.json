@@ -2,6 +2,7 @@
   "name": "sitevitrine",
   "version": "1.0.0",
   "private": true,
+  "homepage": "/vitrinesite",
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "lucide-react": "^0.322.0",

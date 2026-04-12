@@ -170,37 +170,44 @@
   .mobile-menu-overlay {
     position: fixed;
     inset: 0;
-    top: 0;
-    background: #000 !important; /* Force solid black for testing/safety */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    width: 100vw;
+    height: 100vh;
+    background-color: #000 !important;
+    background-image: none !important;
     color: #fff !important;
-    padding: 100px 40px 40px;
+    padding: 120px 40px 60px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    z-index: 100000;
+    z-index: 999999;
     overflow-y: auto;
+    left: 0;
+    top: 0;
 
     nav {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 35px;
+      margin-bottom: 60px;
 
       a {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         font-weight: 800;
         text-decoration: none;
-        color: var(--h-text);
+        color: #fff !important;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 10px;
       }
     }
 
     .mobile-universe-selector {
       p {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         font-weight: 900;
-        opacity: 0.5;
-        margin-bottom: 20px;
+        opacity: 0.6;
+        margin-bottom: 25px;
+        letter-spacing: 2px;
       }
 
       .grid {
@@ -209,16 +216,17 @@
         gap: 15px;
 
         button {
-          padding: 15px;
+          padding: 18px;
           border-radius: 12px;
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           font-weight: 800;
           background: transparent;
-          color: var(--h-text);
+          color: #fff;
+          font-size: 0.8rem;
 
           &.active {
-            background: var(--h-accent);
-            color: var(--h-active-text);
+            background: #fff;
+            color: #000;
             border-color: transparent;
           }
         }
@@ -226,12 +234,15 @@
     }
 
     .mobile-login {
+       margin-top: 50px;
        padding: 20px;
-       border-radius: 15px;
+       border-radius: 50px;
        border: none;
        font-weight: 900;
-       background: var(--h-btn-bg);
-       color: var(--h-btn-text);
+       background: #fff;
+       color: #000;
+       font-size: 1rem;
+       text-align: center;
     }
   }
 
