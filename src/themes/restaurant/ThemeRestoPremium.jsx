@@ -1,6 +1,7 @@
 import React from 'react';
 import { Utensils, Clock, MapPin, Star } from 'lucide-react';
 import { PROFESSIONS } from '../../professions';
+import FavoriteButton from '../../components/common/FavoriteButton';
 
 export default function ThemeRestoPremium({ siteData, products, isEditable, onEditProduct }) {
   if (!siteData) return null;
@@ -82,6 +83,7 @@ export default function ThemeRestoPremium({ siteData, products, isEditable, onEd
                 >
                   <div className="img-box">
                     <img src={p.img || p.image_url} alt={p.nom} />
+                    <FavoriteButton productId={p.id} />
                     {isEditable && <div className="edit-overlay">✏️</div>}
                     {p.tag && (
                       <span className="tag">{p.tag.toUpperCase()}</span>

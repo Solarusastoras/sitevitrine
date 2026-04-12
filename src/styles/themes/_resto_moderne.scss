@@ -354,4 +354,77 @@
       opacity: 0.3;
     }
   }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 1024px) {
+    .menu-section, .contact-section {
+      padding: 80px 5%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 20px;
+      nav { display: none; }
+    }
+
+    .enterprise-hero-header {
+      padding: 40px 20px;
+      h1 { font-size: 2.2rem; }
+    }
+
+    .moderne-hero-centered {
+      padding: 60px 20px;
+      h2 { font-size: 1.8rem; margin-bottom: 30px; }
+
+      .plat-main-display {
+        flex-direction: column;
+        gap: 30px;
+
+        .plat-img-box {
+          width: 100%;
+          border-radius: 12px;
+          height: 250px;
+        }
+
+        .plat-info-box {
+          text-align: center;
+          h3 { font-size: 1.8rem; }
+          p { font-size: 1.4rem; }
+        }
+      }
+    }
+
+    .menu-section {
+      padding: 60px 20px;
+
+      .category-block {
+        margin-bottom: 60px;
+        .cat-title {
+          font-size: 2.5rem;
+          margin-bottom: 0px;
+          padding-left: 0;
+          text-align: center;
+        }
+        .items-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+    }
+
+    .contact-section {
+      padding: 60px 20px;
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .horaires-box h2 { font-size: 2rem; }
+      .address-col .address-card { padding: 25px; }
+    }
+
+    footer {
+      padding: 40px 20px;
+    }
+  }
 }

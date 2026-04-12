@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Navigation, Compass } from 'lucide-react';
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default function ThemeMinimal({ siteData, products }) {
   const [userAddress, setUserAddress] = useState('');
@@ -37,7 +38,7 @@ export default function ThemeMinimal({ siteData, products }) {
           <button className="btn-minimal">EXPLORER</button>
         </div>
         <div className="hero-img-box">
-          <img src={products[0]?.img || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80'} alt="Hero" />
+          <img src={products[0]?.img || 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80'} alt="Hero" />
         </div>
       </section>
 
@@ -58,6 +59,7 @@ export default function ThemeMinimal({ siteData, products }) {
             <div key={i} className="service-card">
               <div className="img-wrapper">
                 <img src={p.img || p.image_url} alt={p.nom} />
+                <FavoriteButton productId={p.id} />
                 {p.tag && <div className="product-tag">{p.tag}</div>}
               </div>
               <div className="card-body">

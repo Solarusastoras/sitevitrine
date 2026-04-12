@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Leaf, Map, Compass, MapPin } from 'lucide-react';
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default function ThemeEco({ siteData, products }) {
    const [userAddress, setUserAddress] = useState('');
@@ -32,7 +33,7 @@ export default function ThemeEco({ siteData, products }) {
 
          <section className="eco-hero-section">
             <div className="e-hero-img-box">
-               <img src={products[0]?.img || 'https://images.unsplash.com/photo-1542295669297-4d352b042bca?w=1200&q=80'} alt="Eco Hero" />
+               <img src={products[0]?.img || 'https://images.unsplash.com/photo-1515343483120-f4991f21b3f5?w=1200&q=80'} alt="Eco Hero" />
             </div>
             <div>
                <h1>Naturellement<br />{siteData.nomEntreprise}</h1>
@@ -63,6 +64,7 @@ export default function ThemeEco({ siteData, products }) {
                   <div key={i} className="product-card">
                      <div className="img-wrapper">
                         <img src={p.img || p.image_url} alt={p.nom} />
+                        <FavoriteButton productId={p.id} />
                         {p.tag && (
                            <div className="product-tag">{p.tag}</div>
                         )}

@@ -276,4 +276,48 @@
       letter-spacing: 4px;
     }
   }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 1024px) {
+    .minimal-hero-section, .minimal-about-section, .minimal-services-section, .minimal-contact-section {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .minimal-hero-section {
+      padding: 60px 20px;
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px;
+      h1 { font-size: 2.5rem; margin-bottom: 20px; }
+      p { font-size: 1.1rem; margin-bottom: 40px; }
+      .hero-img-box { height: 40vh; grid-row: 1; }
+    }
+
+    .minimal-about-section {
+      padding: 80px 20px;
+      h2 { font-size: 2.2rem; }
+      p { font-size: 1.2rem; }
+    }
+
+    .minimal-services-section {
+      padding: 80px 20px;
+      .section-tag { margin-bottom: 40px; letter-spacing: 4px; }
+      .services-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    .minimal-contact-section {
+      padding: 60px 20px;
+      .contact-header {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+        h3 { font-size: 2rem; }
+        .horaires-box { text-align: center; ul li { justify-content: center; } }
+      }
+      .map-container { height: 300px; }
+    }
+  }
 }

@@ -294,6 +294,63 @@
       opacity: 0.4;
       margin-top: 15px;
       font-size: 14px;
+  }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 1024px) {
+    .eco-hero-section, .eco-about-section, .eco-products-section, .eco-contact-section {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .eco-hero-section {
+      padding: 60px 20px;
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px;
+
+      h1 { font-size: 2.5rem; }
+      p { font-size: 1.1rem; }
+
+      .e-hero-img-box {
+        grid-row: 1;
+        height: 40vh;
+      }
+    }
+
+    .eco-about-section {
+      padding: 80px 20px;
+      h2 { font-size: 2.2rem; }
+      p { font-size: 1.2rem; }
+    }
+
+    .eco-products-section {
+      padding: 80px 20px;
+      .section-header {
+        margin-bottom: 50px;
+        h2 { font-size: 2.5rem; }
+      }
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    .eco-contact-section {
+      padding: 60px 20px;
+      .contact-card {
+        padding: 30px;
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .title-box h2 { font-size: 2rem; }
+      .address { font-size: 1.1rem; }
+    }
+
+    footer {
+      padding: 60px 20px;
     }
   }
 }

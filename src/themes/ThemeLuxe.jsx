@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Navigation, Compass } from 'lucide-react';
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default function ThemeLuxe({ siteData, products }) {
   const [userAddress, setUserAddress] = useState('');
@@ -36,7 +37,7 @@ export default function ThemeLuxe({ siteData, products }) {
       <section className="l-hero">
         <div
           className="hero-bg"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2000')` }}
+          style={{ backgroundImage: `url(${products[0]?.img || 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2000'})` }}
         ></div>
 
         <div className="l-hero-inner reveal">
@@ -89,6 +90,7 @@ export default function ThemeLuxe({ siteData, products }) {
                   style={{ height: i % 2 === 0 ? '600px' : '450px' }}
                   className="l-img-hover"
                 />
+                <FavoriteButton productId={p.id} />
                 {p.tag && <div className="p-tag-badge">{p.tag.toUpperCase()}</div>}
               </div>
               <div className="card-footer">

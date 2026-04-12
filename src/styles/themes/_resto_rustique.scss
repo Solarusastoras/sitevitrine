@@ -284,4 +284,38 @@
       opacity: 0.3;
     }
   }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 768px) {
+    .rustique-top-header {
+      padding: 40px 0;
+      h1 { font-size: 2.22rem; }
+    }
+
+    .rustique-hero {
+      padding: 40px 0;
+      gap: 30px;
+      .img-col img { border-radius: 20px; box-shadow: 10px 10px 0 var(--primary); }
+      .text-col {
+        text-align: center;
+        h2 { font-size: 2rem; margin-bottom: 20px; }
+        p { font-size: 1.1rem; }
+      }
+    }
+
+    .rustique-table-section {
+      padding: 60px 0;
+      margin: 40px 0;
+      border-radius: 30px;
+      .section-title-box h2 { font-size: 2.2rem; }
+      .table-grid { padding: 0 20px; grid-template-columns: 1fr; }
+    }
+
+    .contact-section {
+      padding: 60px 0;
+      grid-template-columns: 1fr;
+      .info-box { padding: 30px 20px; h2 { font-size: 2rem; } .horaires-list .horaire-item { font-size: 1rem; } }
+      .map-wrapper { height: 300px; }
+    }
+  }
 }

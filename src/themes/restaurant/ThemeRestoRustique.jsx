@@ -1,6 +1,7 @@
 import React from 'react';
 import { Coffee, Map } from 'lucide-react';
 import { PROFESSIONS } from '../../professions';
+import FavoriteButton from '../../components/common/FavoriteButton';
 
 export default function ThemeRestoRustique({ siteData, products, isEditable, onEditProduct }) {
   if (!siteData) return null;
@@ -40,6 +41,7 @@ export default function ThemeRestoRustique({ siteData, products, isEditable, onE
           onClick={() => isEditable && platDuJour && onEditProduct(platDuJour)}
         >
           <img src={(platDuJour?.img || platDuJour?.image_url) || products[1]?.img || products[1]?.image_url} alt="Ambiance" />
+          {platDuJour && <FavoriteButton productId={platDuJour.id} />}
           {isEditable && platDuJour && <div className="edit-overlay">✏️ MODIFIER</div>}
         </div>
         <div className="text-col">
@@ -67,6 +69,7 @@ export default function ThemeRestoRustique({ siteData, products, isEditable, onE
                   >
                     <div className="img-wrapper">
                       <img src={p.img || p.image_url} alt={p.nom} />
+                      <FavoriteButton productId={p.id} />
                       {isEditable && <div className="edit-overlay">✏️</div>}
                     </div>
                     <h3>{p.nom || p.name}</h3>

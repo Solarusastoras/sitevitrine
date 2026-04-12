@@ -303,4 +303,55 @@
       font-size: 0.7rem;
     }
   }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 1024px) {
+    .moderne-hero-section { padding: 80px 5%; .m-hero-title { font-size: 4rem; } }
+  }
+
+  @media (max-width: 768px) {
+    .moderne-hero-section {
+      grid-template-columns: 1fr;
+      padding: 60px 20px;
+      .m-hero-title { font-size: 2.5rem; line-height: 1; margin: 30px 0; }
+      .hero-desc { font-size: 1.1rem; }
+      .hero-img-col {
+        border-left: none;
+        border-top: 4px solid #000;
+        padding-left: 0;
+        padding-top: 40px;
+        margin-top: 40px;
+        .img-wrapper { height: 350px; }
+      }
+    }
+
+    .moderne-products-section {
+      padding: 60px 20px;
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+        margin-bottom: 40px;
+        h2 { font-size: 2.2rem; }
+      }
+      .products-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    .moderne-contact-section {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-info {
+        padding: 60px 20px;
+        h3 { font-size: 2rem; }
+        .address-block { padding-left: 20px; p.address { font-size: 1.2rem; } }
+        .horaires-box { padding: 30px 20px; }
+      }
+      .map-col { border-left: none; border-top: 4px solid #000; height: 300px; }
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+    }
+  }
 }

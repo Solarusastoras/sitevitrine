@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Navigation, Compass } from 'lucide-react';
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default function ThemeVintage({ siteData, products }) {
    const [userAddress, setUserAddress] = useState('');
@@ -38,7 +39,8 @@ export default function ThemeVintage({ siteData, products }) {
             </div>
             <div className="v-polaroid-container">
                <div className="v-polaroid">
-                  <img src={products[0]?.img || 'https://images.unsplash.com/photo-1542295669297-4d352b042bca?w=800&q=80'} alt="Vintage Hero" />
+                  <img src={products[0]?.img || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&q=80'} alt="Vintage Hero" />
+                  <FavoriteButton productId={products[0]?.id} />
                   <div className="polaroid-caption">
                      Authenticité & Savoir-faire
                   </div>
@@ -61,6 +63,7 @@ export default function ThemeVintage({ siteData, products }) {
                   <div key={i} className="article-card">
                      <div className="img-wrapper">
                         <img src={p.img || p.image_url} alt={p.nom} />
+                        <FavoriteButton productId={p.id} />
                         {p.tag && (
                            <div className="tag-circle">
                               {p.tag.toUpperCase()}

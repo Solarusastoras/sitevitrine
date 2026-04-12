@@ -18,6 +18,24 @@
       justify-content: space-between;
       padding: 0 30px;
 
+      .desktop-only {
+        @media (max-width: 768px) {
+          display: none !important;
+        }
+      }
+
+      .mobile-menu-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+
+        @media (max-width: 768px) {
+          display: block;
+        }
+      }
+
       .admin-toggle {
         width: 80px;
         background: transparent;
@@ -51,10 +69,6 @@
           cursor: pointer;
           transition: 0.2s;
           background: transparent;
-
-          &.active {
-            // Background and color set via inline for dynamic accent
-          }
         }
       }
 
@@ -138,492 +152,115 @@
           font-size: 0.7rem;
         }
       }
-    }
-  }
 
-  .admin-bar {
-    position: fixed;
-    top: 125px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9000;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    padding: 8px 10px;
-    border-radius: 100px;
-    display: flex;
-    gap: 10px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-
-    button {
-      border: none;
-      padding: 12px 25px;
-      border-radius: 50px;
-      font-weight: 900;
-      font-size: 0.75rem;
-      cursor: pointer;
-      color: #fff;
-      transition: background 0.3s;
-
-      &.btn-add {
-        background: #00cc66;
-
-        &:hover {
-          background: #00aa55;
-        }
-      }
-
-      &.btn-manage {
-        background: #333;
-
-        &:hover {
-          background: #444;
-        }
-      }
-    }
-  }
-
-  // Modals
-  .config-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 20000;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .modal-content {
-      background: #111;
-      color: #fff;
-      padding: 60px;
-      border-radius: 50px;
-      width: 90%;
-      max-width: 500px;
-      border: 1px solid #333;
-      position: relative;
-      text-align: center;
-
-      .btn-close {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        background: transparent;
-        color: #fff;
-        opacity: 0.5;
-        border: none;
-        cursor: pointer;
-        font-size: 1.5rem;
-      }
-
-      h2 {
-        font-size: 1.8rem;
-        font-weight: 900;
-        margin-bottom: 10px;
-      }
-
-      p {
-        opacity: 0.5;
-        margin-bottom: 40px;
-        font-size: 0.9rem;
-      }
-
-      input[type="password"] {
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 60px;
+        left: 0;
         width: 100%;
-        background: #222;
-        border: 1px solid #333;
-        color: #fff;
-        padding: 20px;
-        border-radius: 25px;
-        font-size: 1.2rem;
-        text-align: center;
-        font-weight: 900;
-        outline: none;
-        margin-bottom: 20px;
-      }
+        height: calc(100vh - 60px);
+        z-index: 1000;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        backdrop-filter: blur(20px);
+        overflow-y: auto;
 
-      .btn-submit {
-        width: 100%;
-        background: #fff;
-        color: #000;
-        padding: 20px;
-        border-radius: 200px;
-        font-weight: 900;
-        cursor: pointer;
-        border: none;
-      }
+        nav {
+          display: flex;
+          flex-direction: column;
+          gap: 25px;
 
-      .admin-panel {
-        text-align: left;
-
-        h2 {
-          font-size: 1.5rem;
-          font-weight: 900;
-          margin-bottom: 30px;
-          color: #00ccff;
-        }
-
-        .form-group {
-          margin-bottom: 30px;
-
-          label {
-            font-size: 0.7rem;
-            opacity: 0.5;
+          a {
+            font-size: 1.5rem;
             font-weight: 900;
+            text-decoration: none;
             text-transform: uppercase;
           }
+        }
 
-          select {
-            width: 100%;
-            background: transparent;
-            color: #fff;
-            border: none;
-            border-bottom: 1px solid #333;
-            padding: 15px 0;
-            font-size: 1.1rem;
-            font-weight: 700;
-            outline: none;
+        .mobile-universe-selector {
+          p {
+            font-size: 0.7rem;
+            font-weight: 900;
+            opacity: 0.5;
+            margin-bottom: 15px;
+          }
 
-            option {
-              color: #000;
+          .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+
+            button {
+              padding: 15px;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 15px;
+              font-weight: 900;
+              font-size: 0.8rem;
+              text-transform: uppercase;
+
+              &.active {
+                border-color: transparent;
+              }
             }
           }
         }
 
-        .btn-logout-full {
-          width: 100%;
-          background: #ff4444;
-          color: #fff;
-          padding: 15px;
-          border-radius: 20px;
-          border: none;
-          font-weight: 900;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  // Article Modals
-  .article-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 11000;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(15px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-
-    .modal-card {
-      background: #fff;
-      width: 95%;
-      max-width: 600px;
-      max-height: 95vh;
-      border-radius: 40px;
-      padding: 40px;
-      position: relative;
-      overflow-y: auto;
-      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
-
-      h2 {
-        font-size: 2rem;
-        font-weight: 900;
-        margin-bottom: 30px;
-        color: #000;
-      }
-
-      .form-grid {
-        display: grid;
-        gap: 25px;
-      }
-
-      .img-upload-box {
-        height: 220px;
-        background: #f8f8f8;
-        border-radius: 25px;
-        overflow: hidden;
-        border: 3px dashed #eee;
-        position: relative;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .placeholder {
-          display: flex;
-          height: 100%;
-          align-items: center;
-          justify-content: center;
-          opacity: 0.2;
-          font-weight: 900;
-          flex-direction: column;
-          gap: 10px;
-
-          span {
-            font-size: 2rem;
-          }
-        }
-
-        input {
-          position: absolute;
-          inset: 0;
-          opacity: 0;
-          cursor: pointer;
-        }
-      }
-
-      .input-group {
-        label {
-          font-size: 0.7rem;
-          font-weight: 900;
-          opacity: 0.4;
-          text-transform: uppercase;
-          margin-bottom: 8px;
-          display: block;
-        }
-
-        input,
-        textarea {
-          width: 100%;
-          padding: 18px;
-          border-radius: 15px;
-          border: 2px solid #eee;
-          font-size: 1rem;
-          font-weight: 700;
-          outline: none;
-          color: #000;
-
-          &::placeholder {
-            color: #ccc;
-          }
-        }
-
-        textarea {
-          min-height: 100px;
-          resize: none;
-          font-family: inherit;
-        }
-      }
-
-      .row {
-        display: flex;
-        gap: 20px;
-
-        .input-group {
-          flex: 1;
-        }
-      }
-
-      .actions {
-        display: flex;
-        gap: 15px;
-        margin-top: 10px;
-
-        button {
+        .mobile-login {
+          margin-top: auto;
           padding: 20px;
           border-radius: 20px;
           border: none;
           font-weight: 900;
+          font-size: 1rem;
           cursor: pointer;
-
-          &.btn-cancel {
-            flex: 1;
-            background: #f5f5f5;
-            color: #666;
-          }
-
-          &.btn-save {
-            flex: 2;
-            background: #00cc66;
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(0, 204, 102, 0.3);
-          }
         }
       }
     }
-  }
 
-  // Catalogue Modal
-  .catalogue-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 11000;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(15px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    .admin-bar {
+      position: fixed;
+      top: 125px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9000;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 8px 10px;
+      border-radius: 100px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 
-    .modal-wide {
-      background: #fff;
-      width: 95%;
-      max-width: 1100px;
-      max-height: 90vh;
-      border-radius: 40px;
-      padding: 40px;
-      overflow-y: auto;
-      position: relative;
-
-      .btn-close-top {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        background: #f5f5f5;
-        padding: 10px 20px;
-        border-radius: 50px;
+      button {
         border: none;
-        cursor: pointer;
-        font-weight: 800;
-      }
-
-      h2 {
-        font-size: 2.5rem;
+        padding: 12px 25px;
+        border-radius: 50px;
         font-weight: 900;
-        margin-bottom: 40px;
-        color: #000;
-      }
+        font-size: 0.75rem;
+        cursor: pointer;
+        color: #fff;
+        transition: background 0.3s;
 
-      .products-list {
-        display: grid;
-        gap: 25px;
-      }
+        &.btn-add {
+          background: #00cc66;
 
-      .product-row {
-        display: grid;
-        grid-template-columns: 140px 1fr 1.5fr 80px;
-        gap: 30px;
-        align-items: start;
-        padding: 30px;
-        background: #fcfcfc;
-        border-radius: 30px;
-        border: 1px solid #eee;
-
-        .img-col {
-          text-align: center;
-
-          .img-preview {
-            width: 140px;
-            height: 140px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-          }
-
-          .btn-photo-upload {
-            display: block;
-            color: #fff;
-            padding: 10px;
-            font-size: 0.7rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 800;
-            background: #000;
-
-            &.loading {
-              background: #eee;
-              color: #666;
-            }
-
-            input {
-              display: none;
-            }
+          &:hover {
+            background: #00aa55;
           }
         }
 
-        .fields-col {
-          display: grid;
-          gap: 15px;
+        &.btn-manage {
+          background: #333;
 
-          .field-group {
-            label {
-              font-size: 0.65rem;
-              opacity: 0.4;
-              font-weight: 900;
-              text-transform: uppercase;
-              color: #000;
-            }
-
-            input {
-              width: 100%;
-              padding: 12px;
-              border-radius: 12px;
-              border: 2px solid #eee;
-              font-weight: 700;
-              outline: none;
-              color: #000;
-            }
-          }
-
-          .row {
-            display: flex;
-            gap: 10px;
-
-            .field-group {
-              flex: 1;
-            }
-          }
-        }
-
-        .desc-col {
-          label {
-            font-size: 0.65rem;
-            opacity: 0.4;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #000;
-          }
-
-          textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: 2px solid #eee;
-            font-weight: 600;
-            min-height: 100px;
-            outline: none;
-            resize: none;
-            font-size: 0.9rem;
-            color: #000;
-          }
-        }
-
-        .delete-col {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-
-          button {
-            background: #ffeeee;
-            color: #ff0000;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 800;
-            font-size: 1.2rem;
-            transition: transform 0.2s;
-
-            &:hover {
-              transform: scale(1.1);
-            }
+          &:hover {
+            background: #444;
           }
         }
       }
     }
+
   }
 }

@@ -337,4 +337,45 @@
     font-family: serif;
     border-top: 1px solid rgba(0,0,0,0.1);
   }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 1024px) {
+    .vintage-hero-section, .vintage-reference-section, .vintage-almanach-section {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .vintage-hero-section {
+      grid-template-columns: 1fr;
+      padding: 100px 20px 40px;
+      text-align: center;
+      gap: 40px;
+
+      .hero-header {
+        position: static;
+        margin-bottom: 40px;
+        h1 { font-size: 2.5rem; }
+      }
+
+      .v-polaroid {
+        margin: 0 auto;
+        max-width: 300px;
+      }
+    }
+
+    .vintage-reference-section {
+      padding: 60px 20px;
+      .section-title-box h3 { font-size: 1.8rem; }
+      .reference-grid { gap: 40px; }
+    }
+
+    .vintage-almanach-section {
+      padding: 60px 20px;
+      .almanach-header h2 { font-size: 2.2rem; }
+      .almanach-grid { grid-template-columns: 1fr; gap: 60px; }
+      .col-left .address { font-size: 1.2rem; }
+    }
+  }
 }

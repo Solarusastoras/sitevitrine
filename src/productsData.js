@@ -10,7 +10,7 @@ export const DEFAULT_PRODUCTS = {
     { nom: "Conseil & Prévention", desc: "Accompagnement sur mesure pour une santé durable.", img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80" }
   ],
   "ARTISAN": [
-    { nom: "Création sur Mesure", desc: "Pièce unique réalisée selon vos envies et besoins.", img: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=800&q=80" },
+    { nom: "Création sur Mesure", desc: "Pièce unique réalisée selon vos envies et besoins.", img: "https://images.unsplash.com/photo-1542295669297-4d352b042bca?w=800&q=80" },
     { nom: "Restauration", desc: "Redonnez vie à vos objets avec un savoir-faire traditionnel.", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&q=80" },
     { nom: "Matériaux Nobles", desc: "Une sélection rigoureuse pour une qualité d'exception.", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" }
   ],
@@ -100,8 +100,13 @@ export const getPlaceholderProducts = (category, metier) => {
 
   if (isRestaurant && METIER_SPECIFIC_PRODUCTS["Restaurant"]) {
     baseProducts = METIER_SPECIFIC_PRODUCTS["Restaurant"];
-  } else if (metier && METIER_SPECIFIC_PRODUCTS[metier]) {
-    baseProducts = METIER_SPECIFIC_PRODUCTS[metier];
+  } else if (metier) {
+    const matchedMetier = Object.keys(METIER_SPECIFIC_PRODUCTS).find(m => m.toLowerCase() === metier.toLowerCase());
+    if (matchedMetier) {
+      baseProducts = METIER_SPECIFIC_PRODUCTS[matchedMetier];
+    } else {
+      baseProducts = DEFAULT_PRODUCTS[category] || DEFAULT_PRODUCTS["SERVICES"];
+    }
   } else {
     baseProducts = DEFAULT_PRODUCTS[category] || DEFAULT_PRODUCTS["SERVICES"];
   }

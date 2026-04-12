@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Navigation, ArrowRight, ArrowDown } from 'lucide-react';
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default function ThemeModerne({ siteData, products }) {
    const [userAddress, setUserAddress] = useState('');
@@ -32,7 +33,7 @@ export default function ThemeModerne({ siteData, products }) {
             </div>
             <div className="m-slide hero-img-col" style={{ animationDelay: '0.4s' }}>
                <div className="img-wrapper">
-                  <img src={products[0]?.img || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80'} alt="Hero" />
+                  <img src={products[0]?.img || 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=1200&q=80'} alt="Hero" />
                </div>
             </div>
          </section>
@@ -52,6 +53,7 @@ export default function ThemeModerne({ siteData, products }) {
                   <div key={i} className="product-card m-slide" style={{ animationDelay: `${0.2 * i}s` }}>
                      <div className="img-wrapper">
                         <img src={p.img || p.image_url} alt={p.nom} />
+                        <FavoriteButton productId={p.id} />
                      </div>
                      <div className="card-body">
                         <span className="card-num">0{i + 1}</span>

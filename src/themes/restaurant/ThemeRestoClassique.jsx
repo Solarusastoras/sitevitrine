@@ -1,6 +1,7 @@
 import React from 'react';
 import { Wine, UtensilsCrossed } from 'lucide-react';
 import { PROFESSIONS } from '../../professions';
+import FavoriteButton from '../../components/common/FavoriteButton';
 
 export default function ThemeRestoClassique({ siteData, products, isEditable, onEditProduct }) {
   if (!siteData) return null;
@@ -32,6 +33,7 @@ export default function ThemeRestoClassique({ siteData, products, isEditable, on
       <section className="classique-hero">
         <div className={`img-box ${isEditable ? 'editable' : ''}`} onClick={() => isEditable && platDuJour && onEditProduct(platDuJour)}>
           <img src={(platDuJour?.img || platDuJour?.image_url) || products[0]?.img || products[0]?.image_url} alt="Resto" />
+          {platDuJour && <FavoriteButton productId={platDuJour.id} />}
           {isEditable && platDuJour && <div className="edit-overlay">✏️ Modifier</div>}
         </div>
         <div className="hero-content">
@@ -56,23 +58,30 @@ export default function ThemeRestoClassique({ siteData, products, isEditable, on
               <h3>{cat}s</h3>
               <div className="menu-items">
                 {grouped[cat].map((p, i) => (
-                  <div 
-                    key={i} 
-                    className={`menu-item ${isEditable ? 'editable' : ''}`}
-                    onClick={() => isEditable && onEditProduct(p)}
-                  >
-                    <div className="item-info">
-                      <div className="item-header">
-                        <h4>{p.nom || p.name}</h4>
-                        {isEditable && <span className="edit-icon">✏️</span>}
-                        {p.tag && (
-                          <span className="tag">{p.tag}</span>
-                        )}
+                    <div 
+                      key={i} 
+                      className={`menu-item ${isEditable ? 'editable' : ''}`}
+                      onClick={() => isEditable && onEditProduct(p)}
+                    >
+                      <div className="item-img-container">
+                        <div className="item-img">
+                          <img src={p.image_url || p.img} alt={p.nom || p.name} />
+                        </div>
+                        <FavoriteButton productId={p.id} className="item-favorite" />
                       </div>
-                      <p>{p.desc || p.description}</p>
+
+                      <div className="item-info">
+                        <div className="item-header">
+                          <h4>{p.nom || p.name}</h4>
+                          {isEditable && <span className="edit-icon">✏️</span>}
+                          {p.tag && (
+                            <span className="tag">{p.tag}</span>
+                          )}
+                        </div>
+                        <p>{p.desc || p.description}</p>
+                      </div>
+                      <div className="price">{p.prix || "22"}€</div>
                     </div>
-                    <div className="price">{p.prix || "22"}€</div>
-                  </div>
                 ))}
               </div>
             </div>

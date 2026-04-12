@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Info, X } from 'lucide-react';
 import { PROFESSIONS } from '../../professions';
+import FavoriteButton from '../../components/common/FavoriteButton';
 
 export default function ThemeRestoBistro({ siteData, products, isEditable, onEditProduct }) {
   const [selectedImg, setSelectedImg] = useState(null);
@@ -66,6 +67,7 @@ export default function ThemeRestoBistro({ siteData, products, isEditable, onEdi
               >
                 <div className="item-img">
                   <img src={platDuJour.image_url || platDuJour.img} alt={platDuJour.nom || platDuJour.name} />
+                  <FavoriteButton productId={platDuJour.id} />
                   {isEditable && <div className="edit-overlay"><span>✏️ MODIFIER</span></div>}
                 </div>
                 <div className="item-info">
@@ -92,6 +94,7 @@ export default function ThemeRestoBistro({ siteData, products, isEditable, onEdi
                     >
                       <div className="item-img">
                         <img src={p.image_url || p.img} alt={p.nom || p.name} />
+                        <FavoriteButton productId={p.id} />
                         {isEditable && <div className="edit-overlay"><span>✏️</span></div>}
                       </div>
                       <div className="item-name">

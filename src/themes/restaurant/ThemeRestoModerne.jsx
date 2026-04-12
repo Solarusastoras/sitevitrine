@@ -1,6 +1,7 @@
 import React from 'react';
 import { Camera, Layers, Zap } from 'lucide-react';
 import { PROFESSIONS } from '../../professions';
+import FavoriteButton from '../../components/common/FavoriteButton';
 
 export default function ThemeRestoModerne({ siteData, products, isEditable, onEditProduct }) {
   if (!siteData) return null;
@@ -43,6 +44,7 @@ export default function ThemeRestoModerne({ siteData, products, isEditable, onEd
               onClick={() => isEditable && onEditProduct(platDuJour)}
             >
               <img src={platDuJour.img || platDuJour.image_url} alt={platDuJour.nom} />
+              <FavoriteButton productId={platDuJour.id} />
               {isEditable && <div className="edit-overlay">✏️</div>}
             </div>
 
@@ -71,6 +73,7 @@ export default function ThemeRestoModerne({ siteData, products, isEditable, onEd
                 >
                   <div className="card-img">
                     <img src={p.img || p.image_url} alt={p.nom} />
+                    <FavoriteButton productId={p.id} />
                     {isEditable && <div className="edit-overlay">✏️</div>}
                   </div>
                   {p.tag && (
