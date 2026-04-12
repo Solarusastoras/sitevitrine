@@ -48,7 +48,7 @@
     margin-bottom: 80px;
 
     h1 {
-      font-size: 3rem;
+      font-size: clamp(2rem, 8vw, 3rem);
       font-weight: 400;
       font-family: Handlee, cursive;
     }

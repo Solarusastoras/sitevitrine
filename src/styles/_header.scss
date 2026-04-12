@@ -59,6 +59,8 @@
       border: none;
       color: var(--h-text);
       cursor: pointer;
+      position: relative;
+      z-index: 100001; /* Above overlay */
     }
   }
 
@@ -168,14 +170,17 @@
   .mobile-menu-overlay {
     position: fixed;
     inset: 0;
-    top: 60px;
-    background: var(--h-bg);
-    color: var(--h-text);
-    padding: 40px;
+    top: 0;
+    background: #000 !important; /* Force solid black for testing/safety */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #fff !important;
+    padding: 100px 40px 40px;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    z-index: 999;
+    z-index: 100000;
+    overflow-y: auto;
 
     nav {
       display: flex;

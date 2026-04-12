@@ -51,7 +51,7 @@
     }
 
     .m-hero-title {
-      font-size: 6rem;
+      font-size: clamp(2.5rem, 10vw, 6rem);
       font-weight: 900;
       line-height: 0.85;
       margin: 40px 0;

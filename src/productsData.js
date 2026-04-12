@@ -111,10 +111,12 @@ export const getPlaceholderProducts = (category, metier) => {
     baseProducts = DEFAULT_PRODUCTS[category] || DEFAULT_PRODUCTS["SERVICES"];
   }
 
-  // Prefix local image paths with Vite's base URL
-  const baseUrl = import.meta.env.BASE_URL;
+  // Prefix local image paths with PUBLIC_URL
+  const publicUrl = process.env.PUBLIC_URL || "";
   return baseProducts.map(p => ({
     ...p,
-    img: (p.img && p.img.startsWith('/images/')) ? `${baseUrl}${p.img.slice(1)}` : p.img
+    img: (p.img && p.img.startsWith('/images/')) 
+      ? `${publicUrl}${p.img}` 
+      : p.img
   }));
 };
