@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { PROFESSIONS } from './professions';
-import { useApp } from './context/AppContext';
-import Header from './components/layout/Header';
-import AdminPanel from './components/management/AdminPanel';
-import ProductAddModal from './components/management/ProductAddModal';
-import CatalogueModal from './components/management/CatalogueModal';
-import QuickEditModal from './components/management/QuickEditModal';
+import { PROFESSIONS } from '../../professions';
+import { useApp } from '../../context/AppContext';
+import Header from './Header';
+import AdminPanel from '../management/AdminPanel';
+import ProductAddModal from '../management/ProductAddModal';
+import CatalogueModal from '../management/CatalogueModal';
+import QuickEditModal from '../management/QuickEditModal';
 
 export default function Configurator() {
   const {
     currentMetier,
     selectedEnterprise,
-    isClientConnected,
-    editingProduct
+    isClientConnected
   } = useApp();
 
   const [isAdding, setIsAdding] = useState(false);

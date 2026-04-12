@@ -11,7 +11,7 @@ function App() {
       <div className="app-container">
         <Configurator />
         <FavoritesModal />
-        
+
         <main style={{ marginTop: '120px' }}>
           <Routes>
             <Route path="/" element={<ThemeRenderer />} />

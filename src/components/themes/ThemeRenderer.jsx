@@ -31,8 +31,6 @@ export default function ThemeRenderer() {
     Object.entries(theme).forEach(([key, value]) => {
       root.style.setProperty(`--${key}`, value);
     });
-
-    document.body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
   }, [currentStyle, category, isRestaurant]);
 
   if (!siteData) return (
