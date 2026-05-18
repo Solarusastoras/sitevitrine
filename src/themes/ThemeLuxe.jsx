@@ -5,6 +5,7 @@ import FavoriteButton from '../components/common/FavoriteButton';
 export default function ThemeLuxe({ siteData, products, isEditable, onEditProduct }) {
   const [userAddress, setUserAddress] = useState('');
   const [mapUrl, setMapUrl] = useState(siteData?.mapsIframeUrl);
+  const [activeCategory, setActiveCategory] = useState('Tous');
   if (!siteData) return null;
 
   const handleGeolocate = () => {
@@ -80,8 +81,32 @@ export default function ThemeLuxe({ siteData, products, isEditable, onEditProduc
           <h3>Pièces de Signature</h3>
         </div>
 
+        <div className="l-category-filter" style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '60px', flexWrap: 'wrap', padding: '0 20px' }}>
+          {['Tous', ...new Set(products.map(p => p.category).filter(Boolean))].map(cat => (
+            <button 
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              style={{
+                background: activeCategory === cat ? '#c5a059' : 'transparent',
+                color: activeCategory === cat ? '#000' : '#fff',
+                border: '1px solid #c5a059',
+                padding: '8px 25px',
+                borderRadius: '30px',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                fontSize: '0.8rem',
+                fontWeight: 'bold',
+                transition: 'all 0.3s'
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <div className="l-product-gallery">
-          {products.map((p, i) => (
+          {(activeCategory === 'Tous' ? products : products.filter(p => p.category === activeCategory)).map((p, i) => (
             <div key={i} className={i % 2 === 0 ? 'l-card-large reveal' : 'l-card-small reveal'}>
               <div className="img-container">
                 <img
