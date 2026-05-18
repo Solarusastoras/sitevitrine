@@ -87,9 +87,22 @@ export default function ProductAddModal({ isOpen, onClose, availableCategories }
       <h2>Nouvel Article</h2>
       
       <div className="form-grid">
-        <div className="img-upload-box">
+        <div className="img-upload-box" style={{ position: 'relative' }}>
           {newProduct.preview ? (
-            <img src={newProduct.preview} alt="Preview" />
+            <>
+              <img src={newProduct.preview} alt="Preview" />
+              {newProduct.tag && (
+                <div style={{
+                  position: 'absolute', top: '10px', right: '10px',
+                  background: 'var(--h-accent, #c5a059)', color: '#000',
+                  padding: '5px 15px', fontSize: '0.75rem', fontWeight: 'bold',
+                  letterSpacing: '2px', boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
+                  zIndex: 10
+                }}>
+                  {newProduct.tag.toUpperCase()}
+                </div>
+              )}
+            </>
           ) : (
             <div className="placeholder">
               <Upload size={40} />

@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useApp } from '../../context/AppContext';
 import { X } from 'lucide-react';
 
-export default function ClientLoginModal({ isOpen, onClose }) {
+export default function ClientLoginModal({ isOpen, onClose, onAdd, onManage }) {
   const { isClientConnected, setIsClientConnected, isAdminConnected } = useApp();
   const [password, setPassword] = useState('');
 
@@ -11,7 +11,6 @@ export default function ClientLoginModal({ isOpen, onClose }) {
     e.preventDefault();
     if (password === '0000') {
       setIsClientConnected(true);
-      onClose();
       setPassword('');
     } else {
       alert("Code incorrect.");
@@ -57,11 +56,14 @@ export default function ClientLoginModal({ isOpen, onClose }) {
           <h2 className="title-admin">ESPACE CLIENT</h2>
           <div className="client-info">
             <p className="client-connected-msg">Vous êtes connecté avec succès.</p>
-            <div className="modal-actions">
-              <button 
-                onClick={handleLogout} 
-                className="btn-full btn-danger"
-              >
+            <div className="modal-actions" style={{ flexDirection: 'column', gap: '15px' }}>
+              <button onClick={onAdd} className="btn-save btn-full" style={{ background: 'var(--h-accent)', color: '#000' }}>
+                ➕ AJOUTER UN ARTICLE
+              </button>
+              <button onClick={onManage} className="btn-save btn-full" style={{ background: '#333', color: '#fff' }}>
+                📦 GÉRER MON CATALOGUE
+              </button>
+              <button onClick={handleLogout} className="btn-full btn-danger" style={{ marginTop: '20px' }}>
                 DÉCONNEXION
               </button>
             </div>

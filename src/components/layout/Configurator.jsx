@@ -51,6 +51,8 @@ export default function Configurator() {
       <ClientLoginModal 
         isOpen={showClientLogin} 
         onClose={() => setShowClientLogin(false)} 
+        onAdd={() => { setShowClientLogin(false); setIsAdding(true); }}
+        onManage={() => { setShowClientLogin(false); setIsEditing(true); }}
       />
 
       {/* ➕ MODAL AJOUT ARTICLE */}
