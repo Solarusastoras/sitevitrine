@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { MapPin, Navigation, Compass } from 'lucide-react';
+import { MapPin, Navigation, Compass, Edit } from 'lucide-react';
 import FavoriteButton from '../components/common/FavoriteButton';
 
-export default function ThemeLuxe({ siteData, products }) {
+export default function ThemeLuxe({ siteData, products, isEditable, onEditProduct }) {
   const [userAddress, setUserAddress] = useState('');
   const [mapUrl, setMapUrl] = useState(siteData?.mapsIframeUrl);
   if (!siteData) return null;
@@ -92,6 +92,15 @@ export default function ThemeLuxe({ siteData, products }) {
                 />
                 <FavoriteButton productId={p.id} />
                 {p.tag && <div className="p-tag-badge">{p.tag.toUpperCase()}</div>}
+                {isEditable && (
+                  <button 
+                    onClick={() => onEditProduct(p)}
+                    style={{ position: 'absolute', top: '15px', left: '15px', background: '#fff', color: '#000', border: 'none', padding: '10px', borderRadius: '50%', cursor: 'pointer', zIndex: 10, boxShadow: '0 4px 10px rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    title="Modifier l'article"
+                  >
+                    <Edit size={18} />
+                  </button>
+                )}
               </div>
               <div className="card-footer">
                 <div>

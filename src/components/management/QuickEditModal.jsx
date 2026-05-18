@@ -114,6 +114,22 @@ export default function QuickEditModal({ availableCategories }) {
           </div>
         </div>
 
+        <div className="input-group">
+          <label>Tag (Badge)</label>
+          <input 
+            defaultValue={editingProduct.tag} 
+            onBlur={(e) => handleProductUpdate(editingProduct.id, 'tag', e.target.value)} 
+          />
+        </div>
+
+        <div className="input-group">
+          <label>Description</label>
+          <textarea
+            defaultValue={editingProduct.desc || editingProduct.description}
+            onBlur={(e) => handleProductUpdate(editingProduct.id, 'desc', e.target.value)}
+          />
+        </div>
+
         <div className="modal-actions">
           <button onClick={() => setEditingProduct(null)} className="btn-full" style={{ background: '#000' }}>
             <Check size={20} />

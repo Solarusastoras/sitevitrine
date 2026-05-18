@@ -5,10 +5,16 @@ import { Menu, X, Settings, LogIn, LogOut, Heart } from 'lucide-react';
 export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage, isAdding, isEditing }) {
   const {
     currentStyle, setCurrentStyle,
-    isClientConnected, handleLogout,
+    isClientConnected, setIsClientConnected,
+    setIsAdminConnected,
     siteData, isRestaurant,
     favorites, setIsFavoritesModalOpen
   } = useApp();
+
+  const handleLogout = () => {
+    setIsClientConnected(false);
+    setIsAdminConnected(false);
+  };
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
