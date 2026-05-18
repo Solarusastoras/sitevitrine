@@ -3,6 +3,7 @@ import { PROFESSIONS } from '../../professions';
 import { useApp } from '../../context/AppContext';
 import Header from './Header';
 import AdminPanel from '../management/AdminPanel';
+import ClientLoginModal from '../management/ClientLoginModal';
 import ProductAddModal from '../management/ProductAddModal';
 import CatalogueModal from '../management/CatalogueModal';
 import QuickEditModal from '../management/QuickEditModal';
@@ -17,6 +18,7 @@ export default function Configurator() {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
+  const [showClientLogin, setShowClientLogin] = useState(false);
 
   const professionInfo = PROFESSIONS.find(p => p.name === currentMetier);
   const availableCategories = professionInfo?.productCategories || ["Article", "Service"];
@@ -25,6 +27,7 @@ export default function Configurator() {
     <div className="configurator-wrapper">
       <Header 
         onShowAdmin={() => setShowAdmin(!showAdmin)}
+        onShowClientLogin={() => setShowClientLogin(!showClientLogin)}
         onAdd={() => setIsAdding(true)}
         onManage={() => setIsEditing(true)}
         isAdding={isAdding}
@@ -43,6 +46,11 @@ export default function Configurator() {
       <AdminPanel 
         isOpen={showAdmin} 
         onClose={() => setShowAdmin(false)} 
+      />
+
+      <ClientLoginModal 
+        isOpen={showClientLogin} 
+        onClose={() => setShowClientLogin(false)} 
       />
 
       {/* ➕ MODAL AJOUT ARTICLE */}

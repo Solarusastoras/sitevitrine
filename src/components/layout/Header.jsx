@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Menu, X, Settings, LogIn, LogOut, Heart } from 'lucide-react';
 
-export default function Header({ onShowAdmin, onAdd, onManage, isAdding, isEditing }) {
+export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage, isAdding, isEditing }) {
   const {
     currentStyle, setCurrentStyle,
     isClientConnected, handleLogout,
@@ -130,7 +130,7 @@ export default function Header({ onShowAdmin, onAdd, onManage, isAdding, isEditi
 
           <div className="btn-connexion">
             {!isClientConnected ? (
-              <button onClick={onShowAdmin}>CONNEXION 🔐</button>
+              <button onClick={onShowClientLogin}>CONNEXION 🔐</button>
             ) : (
               <button onClick={handleLogout} className="btn-logout">DECO. ✕</button>
             )}
@@ -160,7 +160,7 @@ export default function Header({ onShowAdmin, onAdd, onManage, isAdding, isEditi
             </div>
           </div>
           {!isClientConnected ? (
-            <button className="mobile-login" onClick={() => { onShowAdmin(); setMobileMenuOpen(false); }}>CONNEXION</button>
+            <button className="mobile-login" onClick={() => { onShowClientLogin?.(); setMobileMenuOpen(false); }}>CONNEXION</button>
           ) : (
             <button className="mobile-login" style={{ background: '#ff4444', color: '#fff' }} onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>DÉCONNEXION</button>
           )}

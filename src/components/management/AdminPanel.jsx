@@ -22,10 +22,6 @@ export default function AdminPanel({ isOpen, onClose }) {
       setIsClientConnected(true);
       onClose();
       setPassword('');
-    } else if (password === '0000') {
-      setIsClientConnected(true);
-      onClose();
-      setPassword('');
     } else {
       alert("Code incorrect.");
     }
@@ -95,48 +91,34 @@ export default function AdminPanel({ isOpen, onClose }) {
         <div className="admin-panel">
           <h2 className="title-admin">PANNEAU ADMIN</h2>
 
-          {isAdminConnected ? (
-            <div className="form-grid">
-              <div className="input-group">
-                <label>1. MÈTIER</label>
-                <select 
-                  value={currentMetier} 
-                  onChange={(e) => setCurrentMetier(e.target.value)}
-                >
-                  {PROFESSIONS.map(p => <option key={p.name} value={p.name} style={{ color: '#000' }}>{p.name}</option>)}
-                </select>
-              </div>
-              <div className="input-group">
-                <label>2. CLIENTS (BDD)</label>
-                <select
-                  value={selectedEnterprise?.id || ''}
-                  onChange={(e) => setSelectedEnterprise(entreprises.find(ent => ent.id === Number(e.target.value)))}
-                >
-                  {entreprises.map(e => <option key={e.id} value={e.id} style={{ color: '#000' }}>{e.nom}</option>)}
-                </select>
-              </div>
-              <div className="modal-actions">
-                <button 
-                  onClick={handleLogout} 
-                  className="btn-full btn-danger"
-                >
-                  DÉCONNEXION GLOBALE
-                </button>
-              </div>
+          <div className="form-grid">
+            <div className="input-group">
+              <label>1. MÈTIER</label>
+              <select 
+                value={currentMetier} 
+                onChange={(e) => setCurrentMetier(e.target.value)}
+              >
+                {PROFESSIONS.map(p => <option key={p.name} value={p.name} style={{ color: '#000' }}>{p.name}</option>)}
+              </select>
             </div>
-          ) : (
-            <div className="client-info">
-              <p className="client-connected-msg">Vous êtes connecté en tant que **CLIENT**.</p>
-              <div className="modal-actions">
-                <button 
-                  onClick={handleLogout} 
-                  className="btn-full btn-danger"
-                >
-                  SE DÉCONNECTER
-                </button>
-              </div>
+            <div className="input-group">
+              <label>2. CLIENTS (BDD)</label>
+              <select
+                value={selectedEnterprise?.id || ''}
+                onChange={(e) => setSelectedEnterprise(entreprises.find(ent => ent.id === Number(e.target.value)))}
+              >
+                {entreprises.map(e => <option key={e.id} value={e.id} style={{ color: '#000' }}>{e.nom}</option>)}
+              </select>
             </div>
-          )}
+            <div className="modal-actions">
+              <button 
+                onClick={handleLogout} 
+                className="btn-full btn-danger"
+              >
+                DÉCONNEXION GLOBALE
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </Modal>
