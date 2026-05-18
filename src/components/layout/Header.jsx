@@ -128,11 +128,14 @@ export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage
             {favorites.length > 0 && <span className="fav-badge">{favorites.length}</span>}
           </button>
 
-          <div className="btn-connexion">
+          <div className="btn-connexion" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             {!isClientConnected ? (
               <button onClick={onShowClientLogin}>CONNEXION 🔐</button>
             ) : (
-              <button onClick={handleLogout} className="btn-logout">DECO. ✕</button>
+              <>
+                <button onClick={onAdd} style={{ background: 'var(--h-accent)', color: '#000', border: 'none', padding: '8px 15px', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px' }}>➕ AJOUTER</button>
+                <button onClick={handleLogout} className="btn-logout">DECO. ✕</button>
+              </>
             )}
           </div>
         </div>
@@ -162,7 +165,10 @@ export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage
           {!isClientConnected ? (
             <button className="mobile-login" onClick={() => { onShowClientLogin?.(); setMobileMenuOpen(false); }}>CONNEXION</button>
           ) : (
-            <button className="mobile-login" style={{ background: '#ff4444', color: '#fff' }} onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>DÉCONNEXION</button>
+            <div style={{ display: 'flex', flexDirection: 'column', padding: '0 20px', gap: '10px' }}>
+              <button className="mobile-login" style={{ background: 'var(--h-accent)', color: '#000', margin: 0 }} onClick={() => { onAdd(); setMobileMenuOpen(false); }}>➕ AJOUTER</button>
+              <button className="mobile-login" style={{ background: '#ff4444', color: '#fff', margin: 0 }} onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>DÉCONNEXION</button>
+            </div>
           )}
         </div>
       )}
