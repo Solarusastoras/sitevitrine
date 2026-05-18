@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/vitrinesite/static/css/main.8c09be87.css",
+    "main.css": "/vitrinesite/static/css/main.c9f981f5.css",
     "main.js": "/vitrinesite/static/js/main.fdf978de.js",
     "index.html": "/vitrinesite/index.html"
   },
   "entrypoints": [
-    "static/css/main.8c09be87.css",
+    "static/css/main.c9f981f5.css",
     "static/js/main.fdf978de.js"
   ]
 }
