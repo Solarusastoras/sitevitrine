@@ -35,7 +35,7 @@ export default function ThemeLuxe({ siteData, products, isEditable, onEditProduc
       <div className="l-border-frame"></div>
 
       {/* 1. HERO ÉDITORIAL ASYMÉTRIQUE */}
-      <section className="l-hero">
+      <section id="home" className="l-hero">
         <div
           className="hero-bg"
           style={{ backgroundImage: `url(${products[0]?.img || 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2000'})` }}
@@ -120,10 +120,10 @@ export default function ThemeLuxe({ siteData, products, isEditable, onEditProduc
                 {isEditable && (
                   <button 
                     onClick={() => onEditProduct(p)}
-                    style={{ position: 'absolute', top: '15px', left: '15px', background: '#fff', color: '#000', border: 'none', padding: '10px', borderRadius: '50%', cursor: 'pointer', zIndex: 10, boxShadow: '0 4px 10px rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: '#fff', color: '#000', border: 'none', padding: '15px', borderRadius: '50%', cursor: 'pointer', zIndex: 15, boxShadow: '0 4px 20px rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     title="Modifier l'article"
                   >
-                    <Edit size={18} />
+                    <Edit size={24} />
                   </button>
                 )}
               </div>

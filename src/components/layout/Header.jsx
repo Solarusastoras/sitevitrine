@@ -18,6 +18,13 @@ export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const navItems = [
+    { label: 'Accueil', id: 'home' },
+    { label: 'Notre Histoire', id: 'about' },
+    { label: 'Collections', id: 'services' },
+    { label: 'Nous Contacter', id: 'contact' }
+  ];
+
   const styleNames = isRestaurant
     ? ["Premium", "Classique", "Moderne", "Rustique", "Bistro"]
     : ["Luxe", "Vintage", "Minimal", "Moderne", "Eco"];
@@ -120,8 +127,8 @@ export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage
         </div>
 
         <nav>
-          {['Accueil', 'Notre Histoire', 'Collections', 'Nous Contacter'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>
+          {navItems.map((item) => (
+            <a key={item.label} href={`#${item.id}`}>{item.label}</a>
           ))}
         </nav>
 
@@ -150,8 +157,8 @@ export default function Header({ onShowAdmin, onShowClientLogin, onAdd, onManage
       {mobileMenuOpen && (
         <div className="mobile-menu-overlay">
           <nav>
-            {['Accueil', 'Notre Histoire', 'Collections', 'Nous Contacter'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)}>{item}</a>
+            {navItems.map((item) => (
+              <a key={item.label} href={`#${item.id}`} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>
             ))}
           </nav>
           <div className="mobile-universe-selector">

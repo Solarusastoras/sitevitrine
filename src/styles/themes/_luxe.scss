@@ -206,7 +206,7 @@
       .p-tag-badge {
         position: absolute;
         top: 20px;
-        right: 20px;
+        left: 20px;
         background: #c5a059;
         color: #000;
         padding: 5px 15px;
@@ -215,6 +215,29 @@
         letter-spacing: 2px;
         z-index: 5;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .favorite-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: 1px solid rgba(197, 160, 89, 0.5);
+        padding: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+
+        &:hover, &.active {
+          background: #c5a059;
+          color: #000;
+          border-color: #c5a059;
+        }
       }
     }
 
